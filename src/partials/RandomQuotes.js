@@ -1,12 +1,14 @@
 import React from 'react';
 
 function RandomQuotes(props) {
+	let quotes = props.data || [{quote: "", author: "", id: ""}]; 
+	let quote = quotes[Math.floor(Math.random() * quotes.length)];
 	return (
-		<div className="quote">
+		<div className="quote" >
 			<h4>Random Quotes</h4>
 			<blockquote>
-				Give me the ability to see good things in unexpected places and    talents in ordinary people.  Give me the grace to tell them so.
-				<footer>Winterton Prayer</footer>
+				{quote.quote}
+	<footer>{quote.author}</footer>
 			</blockquote>
 		</div>
 	);

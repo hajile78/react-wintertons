@@ -1,16 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import Header from './partials/Header'
 import LinkQuote from './partials/LinkQuote'
 
-import './App.css';
+import './App.scss';
 import FamilyLinks from './partials/FamilyLinks';
 import RandomQuotes from './partials/RandomQuotes';
 
 function App() {
+  const [quotes, setQuotes] = useState([]);
+
+  useEffect(async () => {
+      const server = 'https://apiwintertons.uc.r.appspot.com';
+      //const server = 'http://localhost:5000'
+      await fetch(`${server}/quotes`).then(
+        (response) => response.json()
+      ).then(
+        (data) => setQuotes(data)
+      ).catch(e => console.log(`Error Message ${e}`));
+  }, []);
+
   return (
     <div className="App">
+      
       <Router>
         <Header />
         <div className="container">
@@ -20,7 +33,7 @@ function App() {
               <Route exact={true} path="/post/:id" component={RandomQuotes} />
 
               </div>
-          <LinkQuote />
+          <LinkQuote data = {quotes} />
         </div>
       </Router>
       <footer className="footer">Copyright © Wintertons.us 2020</footer>

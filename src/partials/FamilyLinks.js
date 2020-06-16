@@ -4,7 +4,7 @@ function FamilyLinks(props) {
 	return (
 		<div className="links">
 			<h4>Winterton Links</h4>
-			<ul class="list-unstyled">
+			<ul className="list-unstyled">
 				<li>
 						<a href="http://www.jackandsharensimmons.com/pioneers/#_Toc106434646" target="_blank" rel="noopener noreferrer">Winterton Prayer</a>
 				</li>

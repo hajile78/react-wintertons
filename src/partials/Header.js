@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 function Header() {
 	return(
 		<header className="App-header">
-			<div className="container">
+			<div className="headerContainer">
 				<div className="brand">
 					<span href="/">Wintertons.us</span>
 				</div>
