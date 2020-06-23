@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FamilyLinks(props) {
+function FamilyLinks() {
 	return (
 		<div className="links">
 			<h4>Winterton Links</h4>

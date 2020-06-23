@@ -3,11 +3,11 @@ import FamilyLinks from './FamilyLinks'
 import RandomQuotes from './RandomQuotes'
 
 function LinkQuote (props) {
-	const quotes = props.data.quotes;
+	//const quotes = useContext(QuoteContext);
 	return (
 		<aside className="linkQuote">
       <FamilyLinks />
-      <RandomQuotes data = {quotes} />
+			<RandomQuotes />      
     </aside>
 	)
 }

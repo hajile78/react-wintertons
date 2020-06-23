@@ -10,12 +10,12 @@ function Header() {
 				</div>
 				<div className="menu">
 					<ul className="items">
-						<li className="item"><Link to={'/'}>Home</Link></li>
-						<li className="item"><Link to={'/elijah'}>Eliah</Link></li>
-						<li className="item"><Link to={'/katie'}>Katie</Link></li>
-						<li className="item"><Link to={'/kalob'}>Kalob</Link></li>
-						<li className="item"><Link to={'/sam'}>Sam</Link></li>
-						<li className="item"><Link to={'/ben'}>Ben</Link></li>
+						<li className="item"><Link to={'/#'}>Home</Link></li>
+						<li className="item"><Link to={'/user/Elijah'}>Elijah</Link></li>
+						<li className="item"><Link to={'/user/Katie'}>Katie</Link></li>
+						<li className="item"><Link to={'/user/Kalob'}>Kalob</Link></li>
+						<li className="item"><Link to={'/user/Sam'}>Sam</Link></li>
+						<li className="item"><Link to={'/user/Ben'}>Ben</Link></li>
 					</ul>
 				</div>
 			</div>

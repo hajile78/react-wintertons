@@ -1,25 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
+import './App.scss';
 import Header from './partials/Header'
 import LinkQuote from './partials/LinkQuote'
-
-import './App.scss';
-import FamilyLinks from './partials/FamilyLinks';
-import RandomQuotes from './partials/RandomQuotes';
+import Posts from './partials/Posts';
 
 function App() {
-  const [quotes, setQuotes] = useState([]);
-
-  useEffect(async () => {
-      const server = 'https://apiwintertons.uc.r.appspot.com';
-      //const server = 'http://localhost:5000'
-      await fetch(`${server}/quotes`).then(
-        (response) => response.json()
-      ).then(
-        (data) => setQuotes(data)
-      ).catch(e => console.log(`Error Message ${e}`));
-  }, []);
 
   return (
     <div className="App">
@@ -28,12 +15,14 @@ function App() {
         <Header />
         <div className="container">
             <div className="main">
-              <Route exact={true} path='/' render={() => (<h1>Welcome to Wintertons.us</h1>)} />
-              <Route exact={true} path="/:slug" component={FamilyLinks} />
-              <Route exact={true} path="/post/:id" component={RandomQuotes} />
-
+              <h1 className="blog-header">Wintertons.us <small>The Whole Famn Damily</small></h1>
+              <div className="postData">
+                <Route exact={true} path = "/" render = {() => (<Posts slug='Main'/>)} />
+                <Route path = "/user/:slug" render = {(props) => (<Posts slug={props.match.params.slug}/>)} />
+                <Route path = "/post/:id" render = {(props) => (<Posts id={props.match.params.id}/>)} />
               </div>
-          <LinkQuote data = {quotes} />
+            </div>
+          <LinkQuote />
         </div>
       </Router>
       <footer className="footer">Copyright © Wintertons.us 2020</footer>
