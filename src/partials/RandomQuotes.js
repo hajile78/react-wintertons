@@ -1,15 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 function RandomQuotes(props) {
+	const [quote, setQuote] = useState(null);	
+	const [quotes, setQuotes] = useState(null);		
+
+	const getQuotes = async () => {
+    const server = 'https://apiwintertons.uc.r.appspot.com';
+    //const server = 'http://localhost:5000'
+    await fetch(`${server}/quotes`).then(
+      (response) => response.json()
+    ).then(
+      (data) => {
+				setQuotes(data.quotes);
+				localStorage.setItem('quotes', data.quotes);				
+				setQuote(data.quotes[Math.floor(Math.random() * data.quotes.length)]);
+			}
+    ).catch(e => console.log(`Error Message ${e}`));
+	}
+
+	useEffect(() => {
+		const local = localStorage.getItem('quotes');
+		if (local && quotes){
+			setQuote(quotes[Math.floor(Math.random() * quotes.length)])
+    } else {
+			getQuotes();
+		}
+	}, [])
+
 	return (
-		<div className="quote">
-			<h4>Random Quotes</h4>
-			<blockquote>
-				Give me the ability to see good things in unexpected places and    talents in ordinary people.  Give me the grace to tell them so.
-				<footer>Winterton Prayer</footer>
-			</blockquote>
+		<div className="quote" >
+			{quote ? 
+				(
+					<>
+						<h4>Random Quotes</h4>
+						<blockquote>
+							{quote.quote}
+							<footer>{quote.author}</footer>
+						</blockquote>
+					</>
+				)
+				: (<></>)
+			}
 		</div>
-	);
+	)	
 }
 
 export default RandomQuotes;

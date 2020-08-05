@@ -2,11 +2,12 @@ import React from 'react';
 import FamilyLinks from './FamilyLinks'
 import RandomQuotes from './RandomQuotes'
 
-function LinkQuote () {
+function LinkQuote (props) {
+	//const quotes = useContext(QuoteContext);
 	return (
 		<aside className="linkQuote">
       <FamilyLinks />
-      <RandomQuotes />
+			<RandomQuotes />      
     </aside>
 	)
 }
