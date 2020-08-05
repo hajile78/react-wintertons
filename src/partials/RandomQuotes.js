@@ -22,7 +22,6 @@ function RandomQuotes(props) {
 		const local = localStorage.getItem('quotes');
 		if (local && quotes){
 			setQuote(quotes[Math.floor(Math.random() * quotes.length)])
-			console.log(quote);
     } else {
 			getQuotes();
 		}
