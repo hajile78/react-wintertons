@@ -1,9 +1,10 @@
 $header-height: 10vh;
+$font-size: clamp(.9rem, 2.5rem, calc(#{$header-height} * .16));
 
 
 .App {
   text-align: center;
-  font-size: calc(#{$header-height} * .16);
+  font-size: $font-size;
   .container {
     margin: 0 auto;
     height: 100%;

@@ -18,7 +18,7 @@ function App() {
               <div className="postData">
                 <Route exact={true} path = "/" render = {() => (<Posts key='Main' slug='Main'/>)} />
                 <Route path = "/user/:slug" render = {(props) => (<Posts key={props.match.params.slug} slug={props.match.params.slug}/>)} />
-                <Route path = "/post/:id" render = {(props) => (<Posts key={props.match.params.id} id={props.match.params.id} />)} />
+                <Route path = "/getPost/:id" render = {(props) => (<Posts key={props.match.params.id} id={props.match.params.id} />)} />
               </div>
             </div>
           <LinkQuote />
