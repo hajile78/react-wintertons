@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 
 import './App.scss';
 import Header from './partials/Header'
@@ -16,11 +16,13 @@ function App() {
             <div className="main">
               <h1 className="blog-header">Wintertons.us <small>The Whole Famn Damily</small></h1>
               <div className="postData">
-                <Switch>
+
+                  <Route exact = {true} path = "/" >
+                    <Redirect to = "/user/Main" />
+                  </Route>
                   <Route path = "/user/:slug" render = {(props) => (<Posts key={props.match.params.slug} slug={props.match.params.slug}/>)} />
-                  <Route path = "/post/:id" render = {(props) => (<Posts key={props.match.params.id} id={props.match.params.id} />)} />
-                  <Route exact = {true} path = "/" render = {() => (<Posts key='Main' slug='Main'/>)} />
-                </Switch>
+                  <Route path = "/post/:id" render = {(props) => (<Posts key={props.match.params.id} id={props.match.params.id} />)} />                  
+
               </div>
             </div>
           <LinkQuote />
