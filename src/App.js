@@ -16,9 +16,9 @@ function App() {
             <div className="main">
               <h1 className="blog-header">Wintertons.us <small>The Whole Famn Damily</small></h1>
               <div className="postData">
-                <Route exact={true} path = "/" render = {() => (<Posts key='Main' slug='Main'/>)} />
                 <Route path = "/user/:slug" render = {(props) => (<Posts key={props.match.params.slug} slug={props.match.params.slug}/>)} />
                 <Route path = "/post/:id" render = {(props) => (<Posts key={props.match.params.id} id={props.match.params.id} />)} />
+                <Route path = "/" render = {() => (<Posts key='Main' slug='Main'/>)} />
               </div>
             </div>
           <LinkQuote />
