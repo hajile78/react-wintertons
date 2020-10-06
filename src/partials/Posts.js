@@ -34,7 +34,7 @@ function Posts(props) {
 			<div>{posts ? posts.map((post) => {	
 				return <div id={post.id} >							
 					<h2>
-						<a href= { '/getPost/' + post.id} >{post.title}</a>
+						<a href= { '/post/' + post.id} >{post.title}</a>
 					</h2>
 					<p className='lead'> 
 						{showUser(post.user)}
