@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactHtmlParser from 'react-html-parser'; 
+import { Link } from 'react-router-dom'
 
 function Posts(props) {
 
@@ -35,7 +36,7 @@ function Posts(props) {
 			<div>{posts ? posts.map((post) => {	
 				return <div id={post.id} key={post.id} >							
 					<h2>
-						<a href= { '/post/' + post.id} >{post.title}</a>
+						<Link to={'/post/' + post.id}>{post.title}</Link>
 					</h2>
 					<p className='lead'> 
 						{showUser(post.user)}
