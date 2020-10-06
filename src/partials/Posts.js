@@ -29,10 +29,11 @@ function Posts(props) {
 	}, []);
 	
 	const showUser = (user) => props.slug === 'Main' ? '' : `by ${user}`;
+	const chunkBody = (id, body) => id ? body.substring(0, 100) : body;
 
 	return (	
 			<div>{posts ? posts.map((post) => {	
-				return <div id={post.id} >							
+				return <div id={post.id} key={post.id} >							
 					<h2>
 						<a href= { '/post/' + post.id} >{post.title}</a>
 					</h2>
