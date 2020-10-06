@@ -10,14 +10,14 @@ function Posts(props) {
         const server = 'https://apiwintertons.uc.r.appspot.com';
 		//const server = 'http://localhost:5000'
 		//const server = 'http://192.168.0.14:5000'
-			const endPoint = props.slug ? `postsBy/${props.slug}` : `post/${props.id}`;
+			const endPoint = props.slug ? `postsBy/${props.slug}` : `getPost/${props.id}`;
 			const arrName = props.slug ? `posts` : `post`;
-			console.log("slug", props.slug);
+			console.log(`${server}/${endPoint}`)
       await fetch(`${server}/${endPoint}`).then(
         (response) => response.json()
       ).then(
         data => {
-					const postElem = data[arrName]
+					const postElem = data[arrName]					
 					setPosts(postElem)
 				}
       ).catch(e => {
