@@ -10,22 +10,20 @@ function App() {
 
   return (
     <div className="App">      
-      {/* <Router> */}
-        <Header />
-        <div className="container">
-            <div className="main">
-              <h1 className="blog-header">Wintertons.us <small>The Whole Famn Damily</small></h1>
-              <div className="postData">
-                <Switch>                  
-                  <Route path = "/nav/:slug" render = {(props) => (<Posts key={props.match.params.slug} slug={props.match.params.slug}/>)} />
-                  <Route path = "/post/:id" render = {(props) => (<Posts key={props.match.params.id} id={props.match.params.id} />)} />   
-                  <Route path = "/" exact render = {() => (<Posts key={'Main'} slug={'Main'}/>)} />               
-                </Switch>
-              </div>
+      <Header />
+      <div className="container">
+          <div className="main">
+            <h1 className="blog-header">Wintertons.us <small>The Whole Famn Damily</small></h1>
+            <div className="postData">
+              <Switch>                
+                <Route path = "/nav/:slug" render = {(props) => (<Posts key={props.match.params.slug} slug={props.match.params.slug}/>)} />
+                <Route path = "/post/:id" render = {(props) => (<Posts key={props.match.params.id} id={props.match.params.id} />)} />   
+                <Route path = "/" exact render = {() => (<Posts key={'Main'} slug={'Main'}/>)} />               
+              </Switch>
             </div>
-          <LinkQuote />
-        </div>
-      {/* </Router> */}
+          </div>
+        <LinkQuote />
+      </div>
       <footer className="footer">Copyright © Wintertons.us 2020</footer>
     </div>
   );
