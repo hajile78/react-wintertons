@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import './App.scss';
 import Header from './partials/Header'
@@ -10,7 +10,7 @@ function App() {
 
   return (
     <div className="App">      
-      <Router>
+      {/* <Router> */}
         <Header />
         <div className="container">
             <div className="main">
@@ -19,13 +19,13 @@ function App() {
                 <Switch>                  
                   <Route path = "/nav/:slug" render = {(props) => (<Posts key={props.match.params.slug} slug={props.match.params.slug}/>)} />
                   <Route path = "/post/:id" render = {(props) => (<Posts key={props.match.params.id} id={props.match.params.id} />)} />   
-                  <Route path = "/" render = {() => (<Posts key={'Main'} slug={'Main'}/>)} />               
+                  <Route path = "/" exact render = {() => (<Posts key={'Main'} slug={'Main'}/>)} />               
                 </Switch>
               </div>
             </div>
           <LinkQuote />
         </div>
-      </Router>
+      {/* </Router> */}
       <footer className="footer">Copyright © Wintertons.us 2020</footer>
     </div>
   );
