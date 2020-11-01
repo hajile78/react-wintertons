@@ -17,9 +17,9 @@ function App() {
               <h1 className="blog-header">Wintertons.us <small>The Whole Famn Damily</small></h1>
               <div className="postData">
                 <Switch>                  
-                  <Route path = "/user/:slug" render = {(props) => (<Posts key={props.match.params.slug} slug={props.match.params.slug}/>)} />
+                  <Route path = "/nav/:slug" render = {(props) => (<Posts key={props.match.params.slug} slug={props.match.params.slug}/>)} />
                   <Route path = "/post/:id" render = {(props) => (<Posts key={props.match.params.id} id={props.match.params.id} />)} />   
-                  <Redirect from = "/" to = "/user/Main" />               
+                  <Route path = "/" render = {() => (<Posts key={'Main'} slug={'Main'}/>)} />               
                 </Switch>
               </div>
             </div>
