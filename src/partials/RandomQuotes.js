@@ -25,7 +25,7 @@ function RandomQuotes(props) {
     } else {
 			getQuotes();
 		}
-	}, [])
+	}, [quotes])
 
 	return (
 		<div className="quote" >
