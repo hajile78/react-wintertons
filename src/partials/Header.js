@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 function Header() {
 	return(
 		<header className="App-header">
-			<div className="headerContainer">
+			<nav className="headerContainer">
 				<div className="brand">
 					<span href="/">Wintertons.us</span>
 				</div>
@@ -18,7 +18,7 @@ function Header() {
 						<li className="item"><Link to={'/nav/Ben'}>Ben</Link></li>
 					</ul>
 				</div>
-			</div>
+			</nav>
 		</header>
 	)
 }

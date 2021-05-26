@@ -30,7 +30,7 @@ const { slug, id } = props;
 	//const chunkBody = (id, body) => id ? body.substring(0, 100) : body;
 
 	return (	
-			<div>{posts ? (posts.length > 0) 
+			<article>{posts ? (posts.length > 0) 
 				? posts.map((post) => {	
 					return <div id={post.id} key={post.id} >							
 						<h2>
@@ -47,7 +47,7 @@ const { slug, id } = props;
 				: <h4>No Content Here :(</h4> 
 			: <div className="loader">Loading...</div>
 
-			}</div>
+			}</article>
 	)
 }
 
