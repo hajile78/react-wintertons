@@ -1,3 +1,7 @@
+p:first-of-type {
+    margin-top: 0;
+}
+
 #modal {
     position: fixed;
     top: 0;
@@ -10,13 +14,18 @@
 .modal-content {
     position:fixed;
     background: white;
-    width: 80%;
+    width: 60%;
     height: auto;
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
     text-align: left;
     padding: 1%;
+}
+.modal-body {
+    column-width: 20vw;
+    column-gap: 2em;
+    column-rule: 1px solid #ccc;
 }
 
 .modal-content>h3 {
