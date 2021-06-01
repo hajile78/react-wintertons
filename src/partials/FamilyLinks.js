@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import ModalContext from '../context/ModalContext';
 
 function FamilyLinks(props) {
-	const { toggleModal, updateModalText } = props;
-	const showModal = (e) => {
+	const obj = useContext(ModalContext)
+	const { setShowModal, setModalText } = obj
+	console.log("ModalContext", JSON.stringify(obj))
+	const openModal = (e) => {
 		e.preventDefault()
 		let header = 'PRAYER FOR THE AUTHOR AND OTHER WINTERTONS WHO GROW OLDER DAY BY DAY'
 		let body = `<p>Lord, thou knowest better than I know myself that I am growing older and will some day be old.  Keep me from the fatal habit of thinking I must say something on every subject- and on every occasion.  Release me from craving to try to straighten out every Winterton’s affairs.</p>
@@ -12,8 +15,8 @@ function FamilyLinks(props) {
 		<p>Lord, keep me reasonably sweet; I do not want to be a saint--some of them are so hard to live with- -but a sour old per son is one of the crowning works of the devil. Give me the ability to see good things in unexpected places and talents in ordinary people.  Give me the grace to tell them so.</p>
 		<p>Amen</p>
 		Curtiousy of <a href="http://www.jackandsharensimmons.com/pioneers/#_Toc106434646" target="_blank" rel="noopener noreferrer">Jack and Sharen Simmons</a> site`
-		updateModalText(header, body)
-		toggleModal()
+		setModalText({ header, body })
+		setShowModal(true)
 	}
 	return (
 		<div className="links">
@@ -23,7 +26,7 @@ function FamilyLinks(props) {
 						<a href="http://www.jackandsharensimmons.com/pioneers/#_Toc106434646" target="_blank" rel="noopener noreferrer">Winterton Prayer</a>
 				</li> */}
 				<li>
-					<a href="" onClick={showModal} >Winterton Prayer</a>
+					<a href="" onClick={openModal} >Winterton Prayer</a>
 				</li>
 				<li>
 					<a href="http://www.jackandsharensimmons.com/pioneers/index.htm" target="_blank" rel="noopener noreferrer">Winterton Pioneers</a>
