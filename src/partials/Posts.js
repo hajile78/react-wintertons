@@ -44,7 +44,7 @@ const { slug, id } = props;
 						<hr />
 					</div>
 				}) 
-				: <h4>No Content Here :(</h4> 
+				: <h3>No Content Here :(</h3> 
 			: <div className="loader">Loading...</div>
 
 			}</article>
