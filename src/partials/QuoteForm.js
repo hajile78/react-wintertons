@@ -39,13 +39,13 @@ function QuoteForm() {
       })
   }
   return (
-    <form id="addQuotes" onSubmit={handleSubmit}>
+    <form id="addQuotes" onSubmit={handleSubmit} autocomplete="off" >
       {alert.show && <Alert {...alert} removeAlert={handleAlert} />}
       <fieldset>
         <label>Quote</label>
-        <input type="input" name="quote" required />
+        <input type="text" name="quote" required />
         <label>Author</label>
-        <input type="input" name="author" />
+        <input type="text" name="author" />
       </fieldset>
 
       <button type="submit">Submit</button>
