@@ -29,6 +29,10 @@ $font-size: clamp(0.9rem, 2.5rem, calc(#{$header-height} * 0.16));
 
   .brand {
     font-size: calc(#{$header-height} * 0.4);
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
   }
 
   .menu {
