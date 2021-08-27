@@ -7,6 +7,7 @@ import Header from './partials/Header'
 import Posts from './partials/Posts'
 import LinkQuote from './partials/LinkQuote'
 import Modal from './partials/Modal'
+import QuoteForm from './partials/QuoteForm'
 
 function App() {
   const [showModal, setShowModal] = useState(false)
@@ -46,6 +47,7 @@ function App() {
                   />
                 )}
               />
+              <Route path="/addQuote" exact render={() => <QuoteForm />} />
               <Route
                 path="/"
                 exact
