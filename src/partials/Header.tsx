@@ -6,7 +6,7 @@ function Header() {
     <header className="App-header">
       <nav className="headerContainer">
         <div className="brand">
-          <span href="/">Wintertons.us</span>
+          <a href="/"><span>Wintertons.us</span></a>
         </div>
         <div className="menu">
           <ul className="items">
