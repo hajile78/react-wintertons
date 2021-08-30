@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import ModalContext from '../context/ModalContext'
 
-function FamilyLinks(props) {
+function FamilyLinks() {
   const obj = useContext(ModalContext)
   const { setShowModal, setModalText } = obj
   console.log('ModalContext', JSON.stringify(obj))
-  const openModal = (e) => {
+  const openModal = (e: React.MouseEvent) => {
     e.preventDefault()
     let header =
       'PRAYER FOR THE AUTHOR AND OTHER WINTERTONS WHO GROW OLDER DAY BY DAY'
