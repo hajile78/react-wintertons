@@ -17,6 +17,7 @@ function QuoteForm() {
 
   const handleSubmit = (e: React.FormEvent<QuotesForm>) => {
     e.preventDefault()
+    const currentTarget = e.currentTarget
     console.log(
       `Button Clicked quote: ${e.currentTarget.quote.value} author: ${e.currentTarget.author.value}`
     )
@@ -28,15 +29,15 @@ function QuoteForm() {
       },
       body: JSON.stringify({
         entity: {
-          quote: e.currentTarget.quote.value,
-          author: e.currentTarget.author.value || 'Unknown',
+          quote: currentTarget.quote.value,
+          author: currentTarget.author.value || 'Unknown',
         },
       }),
     })
       .then((res) => {
         if (res.ok) {
-          e.currentTarget.quote.value = ''
-          e.currentTarget.author.value = ''
+          currentTarget.quote.value = ''
+          currentTarget.author.value = ''
           return handleAlert(true, 'success', 'Quote has been added')
         }
         throw new Error()
@@ -47,17 +48,20 @@ function QuoteForm() {
       })
   }
   return (
-    <form id="addQuotes" onSubmit={handleSubmit} autoComplete="off">
-      {alert.show && <Alert {...alert} removeAlert={handleAlert} />}
-      <fieldset>
-        <label>Quote</label>
-        <input type="text" name="quote" required />
-        <label>Author</label>
-        <input type="text" name="author" />
-      </fieldset>
+    <>
+      <h2>Add new quote</h2>
+      <form id='addQuotes' onSubmit={handleSubmit} autoComplete='off'>
+        {alert.show && <Alert {...alert} removeAlert={handleAlert} />}
+        <fieldset>
+          <label>Quote</label>
+          <input type='text' name='quote' required />
+          <label>Author</label>
+          <input type='text' name='author' />
+        </fieldset>
 
-      <button type="submit">Submit</button>
-    </form>
+        <button type='submit'>Add Quote</button>
+      </form>
+    </>
   )
 }
 
