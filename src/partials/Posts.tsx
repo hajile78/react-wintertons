@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import ReactHtmlParser from 'react-html-parser'
 import { Link } from 'react-router-dom'
 
@@ -15,8 +15,11 @@ type Post = {
   created: Date
 }
 
+const postsPerPage: number = 3
+
 function Posts(props: Props) {
   const [posts, setPosts] = useState<Post[]>([])
+  const [totalPosts, setTotalPosts] = useState<Post[]>([])
   const { slug, id } = props
   useEffect(() => {
     async function getPosts() {
@@ -28,9 +31,23 @@ function Posts(props: Props) {
         .then((response) => response.json())
         .then((data) => {
           const postElem = data[arrName]
-          setPosts(postElem)
+          console.log(postElem)
+          setPosts(
+            postElem.reduce((a: Post[], c: Post, i: number) => {
+              if (i < postsPerPage) {
+                a.push(c)
+              }
+              return a
+            }, [])
+          )
+          setTotalPosts(
+            postElem.filter((v: Post, i: number) => {
+              return i >= postsPerPage
+            })
+          )
         })
         .catch((e) => {
+          setTotalPosts([])
           setPosts([])
           console.log(`Error Message ${e}`)
         })
@@ -39,10 +56,16 @@ function Posts(props: Props) {
   }, [slug, id])
 
   const showUser = (user: string) => (slug === 'Main' ? '' : `by ${user}`)
-  //const chunkBody = (id, body) => id ? body.substring(0, 100) : body;
+  const handelMoreClick = () => {
+    const morePosts = totalPosts.filter((v: Post, i: number) => {
+      return i < postsPerPage 
+    })
+    setPosts([...posts, ...morePosts])
+    setTotalPosts([...totalPosts.slice(postsPerPage)])
+  }
 
   return (
-    <article>
+    <article className="postArticle">
       {posts ? (
         posts.length > 0 ? (
           posts.map((post) => {
@@ -58,7 +81,6 @@ function Posts(props: Props) {
                   {new Date(post.created).toLocaleTimeString()}
                 </p>
                 <div className="postBody">{ReactHtmlParser(post.body)}</div>
-                <hr />
               </div>
             )
           })
@@ -67,6 +89,11 @@ function Posts(props: Props) {
         )
       ) : (
         <div className="loader">Loading...</div>
+      )}
+      {totalPosts && totalPosts.length > 0 ? (
+        <button className="btnSubmitPost" onClick={handelMoreClick}>More</button>
+      ) : (
+        ''
       )}
     </article>
   )
