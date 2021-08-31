@@ -20,6 +20,7 @@ const postsPerPage: number = 3
 function Posts(props: Props) {
   const [posts, setPosts] = useState<Post[]>([])
   const [totalPosts, setTotalPosts] = useState<Post[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
   const { slug, id } = props
   useEffect(() => {
     async function getPosts() {
@@ -45,10 +46,12 @@ function Posts(props: Props) {
               return i >= postsPerPage
             })
           )
+		  setLoading(false)
         })
         .catch((e) => {
           setTotalPosts([])
           setPosts([])
+		  setLoading(false)
           console.log(`Error Message ${e}`)
         })
     }
@@ -66,7 +69,7 @@ function Posts(props: Props) {
 
   return (
     <article className="postArticle">
-      {posts ? (
+      {
         posts.length > 0 ? (
           posts.map((post) => {
             return (
@@ -85,11 +88,11 @@ function Posts(props: Props) {
             )
           })
         ) : (
-          <h3>No Content Here ☹️</h3>
+		  <>
+			{ loading ? <div className="loader">Loading...</div> : <h3>No Content Here ☹️</h3> }
+		  </>
         )
-      ) : (
-        <div className="loader">Loading...</div>
-      )}
+      }
       {totalPosts && totalPosts.length > 0 ? (
         <button className="btnSubmitPost" onClick={handelMoreClick}>More</button>
       ) : (
