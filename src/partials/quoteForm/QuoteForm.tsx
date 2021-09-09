@@ -1,15 +1,20 @@
 import React, { useState } from 'react'
-import Alert from './Alert'
+import Alert from '../Alert'
+import './quoteForm.css'
+import useGetQuotes from '../../hooks/useGetQuotes'
 
 function QuoteForm() {
   interface FormElements extends HTMLFormControlsCollection {
     quote: HTMLInputElement
     author: HTMLInputElement
   }
-  
+
   interface QuotesForm extends HTMLFormElement {
     readonly elements: FormElements
   }
+
+  const {quotes} = useGetQuotes()
+
   const [alert, setAlert] = useState({ show: false, message: '', type: '' })
   const handleAlert = (show = false, type = '', message = '') => {
     setAlert({ show, type, message })
@@ -50,17 +55,32 @@ function QuoteForm() {
   return (
     <>
       <h2>Add new quote</h2>
-      <form id='addQuotes' onSubmit={handleSubmit} autoComplete='off'>
+      <form id="addQuotes" onSubmit={handleSubmit} autoComplete="off">
         {alert.show && <Alert {...alert} removeAlert={handleAlert} />}
         <fieldset>
           <label>Quote</label>
-          <input type='text' name='quote' required />
+          <input type="text" name="quote" required />
           <label>Author</label>
-          <input type='text' name='author' />
+          <input type="text" name="author" />
         </fieldset>
 
-        <button type='submit'>Add Quote</button>
+        <button type="submit">Add Quote</button>
       </form>
+
+      <h2>Quotes in DB already</h2>
+      <figure>
+        {quotes &&
+          quotes.map((quote) => {
+            return (
+              <>
+                <blockquote>
+                  <p>{quote.quote}</p>
+                </blockquote>
+                <figcaption>{quote.author}</figcaption>
+              </>
+            )
+          })}
+      </figure>
     </>
   )
 }
