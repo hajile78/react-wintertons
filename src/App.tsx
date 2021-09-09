@@ -7,7 +7,7 @@ import Header from './partials/Header'
 import Posts from './partials/Posts'
 import LinkQuote from './partials/LinkQuote'
 import Modal from './partials/Modal'
-import QuoteForm from './partials/QuoteForm'
+import QuoteForm from './partials/quoteForm/QuoteForm'
 import PostsForm from './partials/PostsForm'
 
 function App() {
