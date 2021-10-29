@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+  react-ui:
+    container_name: react_wintertons
+    build: 
+      context: ./
+    # volumes:
+    #   - './src'
+    #   - './node_modules'
+    ports:
+      - '3001:3000'
+    # stdin_open: true
+    # environment:
+    #   - CHOKIDAR_USEPOLLING=true
+    command: npm start
