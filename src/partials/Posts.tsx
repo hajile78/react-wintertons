@@ -24,11 +24,8 @@ function Posts(props: Props) {
   const { slug, id } = props
   useEffect(() => {
     async function getPosts() {
-      const server = 'https://apiwintertons.uc.r.appspot.com'
-      //const server = 'http://localhost:5000'
-      const endPoint = slug ? `postsBy/${slug}` : `getPost/${id}`
       const arrName = slug ? `posts` : `post`
-      await fetch(`${server}/${endPoint}`)
+      await fetch(`/api/${slug}`)
         .then((response) => response.json())
         .then((data) => {
           const postElem = data[arrName]
