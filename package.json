@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "concurrently 'node server.js' 'react-scripts start'",
-    "client": "react-scripts build",
+    "client": "react-scripts build && echo '/* /index.html 200' | cat >build/_redirects ",
     "build": "npm run client && node server.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
