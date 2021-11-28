@@ -26,7 +26,7 @@
   "scripts": {
     "start": "concurrently 'node server.js' 'react-scripts start'",
     "client": "react-scripts build",
-    "build": "node server.js && npm run client",
+    "build": "npm run client && node server.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "sass": "sass src/Sass:src/Css --watch --no-source-map"
