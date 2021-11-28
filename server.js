@@ -24,4 +24,7 @@ app.get('/api/:slug', cache('1 hour'), async (req, res) => {
 });
 
 // console.log that your server is up and running
-app.listen(port, () => console.log(`API Listening on port ${port}`))
+app.listen(port, () => {
+    console.log(`API Listening on port ${port}`)
+    return 0
+})
