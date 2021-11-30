@@ -24,10 +24,10 @@
     "typescript": "^4.4.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server.js",
     "dev": "concurrently 'node server.js' 'react-scripts start'",
     "client": "react-scripts build && echo '/* /index.html 200' | cat >build/_redirects ",
-    "build": "npm run client && node server.js",
+    "build": "yarn run client",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "sass": "sass src/Sass:src/Css --watch --no-source-map"

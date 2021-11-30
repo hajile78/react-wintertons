@@ -3,14 +3,21 @@ const cors = require('cors')
 const fetch = require('axios')
 const apicache = require('apicache')
 const app = express();
-const port = 5000 
+const PORT = 5000 
 
 let cache = apicache.middleware
 
+const path = __dirname + '/build/'
+
 app.set('trust proxy', 1)
 
+app.use(express.static(path))
 // Enable cors
 app.use(cors())
+
+app.get('/', function (req,res) {
+    res.sendFile(path + "index.html");
+});
 
 // create a GET route
 app.get('/api/:slug', cache('1 hour'), async (req, res) => { 
@@ -24,7 +31,6 @@ app.get('/api/:slug', cache('1 hour'), async (req, res) => {
 });
 
 // console.log that your server is up and running
-app.listen(port, () => {
-    console.log(`API Listening on port ${port}`)
-    return 0
+app.listen(PORT, () => {
+    console.log(`API Listening on port ${PORT}`)
 })
