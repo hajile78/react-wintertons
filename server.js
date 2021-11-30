@@ -3,7 +3,7 @@ const cors = require('cors')
 const fetch = require('axios')
 const apicache = require('apicache')
 const app = express();
-const PORT = process.env.PORT || 5000 
+const PORT = process.env.PORT || 3000 
 
 let cache = apicache.middleware
 
