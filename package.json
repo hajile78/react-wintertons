@@ -14,7 +14,6 @@
     "apicache": "^1.6.3",
     "axios": "^0.24.0",
     "cors": "^2.8.5",
-    "concurrently": "^6.4.0",
     "node-fetch": "^3.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -27,7 +26,7 @@
     "start": "node server.js",
     "dev": "concurrently 'node server.js' 'react-scripts start'",
     "client": "react-scripts build && echo '/* /index.html 200' | cat >build/_redirects ",
-    "build": "yarn run client",
+    "build": "yarn start && yarn run client",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "sass": "sass src/Sass:src/Css --watch --no-source-map"
@@ -50,6 +49,7 @@
   "devDependencies": {
     "@types/react-html-parser": "^2.0.2",
     "@types/react-router-dom": "^5.1.8",
+    "concurrently": "^6.4.0",
     "ncp": "^2.0.0",
     "sass": "^1.38.1"
   },

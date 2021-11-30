@@ -3,7 +3,7 @@ const cors = require('cors')
 const fetch = require('axios')
 const apicache = require('apicache')
 const app = express();
-const PORT = 5000 
+const PORT = process.env.PORT || 5000 
 
 let cache = apicache.middleware
 
@@ -33,4 +33,5 @@ app.get('/api/:slug', cache('1 hour'), async (req, res) => {
 // console.log that your server is up and running
 app.listen(PORT, () => {
     console.log(`API Listening on port ${PORT}`)
+    return 0
 })
