@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Route, Routes, useParams } from 'react-router-dom'
+import { Routes, Route, useParams } from 'react-router-dom'
 import ModalContext from './context/ModalContext'
 
 import './App.scss'
@@ -13,7 +13,6 @@ import PostsForm from './partials/PostsForm'
 function App() {
   const [showModal, setShowModal] = useState(false)
   const [modalText, setModalText] = useState({})
-  const { id, slug } = useParams()
 
   return (
     <div className="App">
@@ -33,23 +32,17 @@ function App() {
             <Routes>
               <Route
                 path="/nav/:slug"
-                element={<Posts
-                    key={slug}
-                    slug={slug}
-                  />}
+                element={<Posts />}
               />
               <Route
                 path="/post/:id"
-                element={<Posts
-                    key={id}
-                    id={id}
-                  />}
+                element={<Posts />}
               />
               <Route path="/addQuote" element={<QuoteForm />} />
               <Route path="/addPost" element={<PostsForm />} />
               <Route
                 path="/"
-                element={<Posts key={'Main'} slug={'Main'} />}
+                element={<Posts />}
               />
             </Routes>
           </div>
