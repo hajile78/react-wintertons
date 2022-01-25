@@ -26,6 +26,10 @@
     "eject": "react-scripts eject",
     "sass": "sass src/Sass:src/Css --watch --no-source-map"
   },
+  "engines": {
+    "node": ">=14",
+    "npm": "8.1.2"
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
