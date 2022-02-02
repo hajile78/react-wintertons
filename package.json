@@ -51,5 +51,9 @@
     "ncp": "^2.0.0",
     "sass": "^1.49.7",
     "yarn-upgrade-all": "^0.6.1"
-  }
+  },
+  "resolutions": {
+    "postcss": "^8.2.13",
+    "css-select": "^2.1.0"
+}
 }
