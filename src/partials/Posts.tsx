@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, ReactElement } from 'react'
 import ReactHtmlParser from 'react-html-parser'
 import { Link, useParams } from 'react-router-dom'
 
@@ -72,6 +72,8 @@ function Posts(props: Props) {
     setTotalPosts([...totalPosts.slice(postsPerPage)])
   }
 
+  const createBody: any = (post: Post) => { return ReactHtmlParser(`<div className="postBody"> ${post.body}</div>`)}
+
   return (
     <article className="postArticle">
       {
@@ -88,7 +90,7 @@ function Posts(props: Props) {
                   {new Date(post.created).toDateString()}{' '}
                   {new Date(post.created).toLocaleTimeString()}
                 </p>
-                <div className="postBody">{ReactHtmlParser(post.body)}</div>
+                {createBody(post)}
               </div>
             )
           })
