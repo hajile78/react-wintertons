@@ -1,7 +1,8 @@
-import useGetQuotes from '../hooks/useGetQuotes'
+// import useGetQuotes from '../hooks/useGetQuotes'
+import { Quote } from './quoteForm/Quote'
 
-function RandomQuotes() {
-  const {quote} = useGetQuotes()
+function RandomQuotes(quote: Quote) {
+  //const {quote} = useGetQuotes()
 
   return (
     <div className="quote">

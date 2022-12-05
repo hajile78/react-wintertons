@@ -5,7 +5,7 @@ import ModalContext from '../context/ModalContext'
 
 const Modal = () => {
   const obj = useContext(ModalContext)
-  console.log('ModalContext in Modal', JSON.stringify(obj))
+  // console.log('ModalContext in Modal', JSON.stringify(obj))
   const { showModal, setShowModal, modalText } = obj
   return (
     showModal && (
