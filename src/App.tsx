@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Routes, Route, useParams } from 'react-router-dom'
 import ModalContext from './context/ModalContext'
 
 import './App.scss'
@@ -29,33 +29,22 @@ function App() {
             Wintertons.us <small>The Whole Famn Damily</small>
           </h1>
           <div className="postData">
-            <Switch>
+            <Routes>
               <Route
                 path="/nav/:slug"
-                render={(props) => (
-                  <Posts
-                    key={props.match.params.slug}
-                    slug={props.match.params.slug}
-                  />
-                )}
+                element={<Posts />}
               />
               <Route
                 path="/post/:id"
-                render={(props) => (
-                  <Posts
-                    key={props.match.params.id}
-                    id={props.match.params.id}
-                  />
-                )}
+                element={<Posts />}
               />
-              <Route path="/addQuote" exact render={() => <QuoteForm />} />
-              <Route path="/addPost" exact render={() => <PostsForm />} />
+              <Route path="/addQuote" element={<QuoteForm />} />
+              <Route path="/addPost" element={<PostsForm />} />
               <Route
                 path="/"
-                exact
-                render={() => <Posts key={'Main'} slug={'Main'} />}
+                element={<Posts />}
               />
-            </Switch>
+            </Routes>
           </div>
         </div>
         <ModalContext.Provider

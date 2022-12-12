@@ -3,19 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^12.0.0",
-    "@testing-library/user-event": "^13.2.1",
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.7.2",
-    "@types/react": "^17.0.19",
-    "@types/react-dom": "^17.0.9",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/jest": "^29.2.3",
+    "@types/node": "^18.11.9",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
+    "buffer": "^6.0.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-html-parser": "^2.0.2",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.3",
-    "typescript": "^4.4.2"
+    "react-router-dom": "^6.4.3",
+    "react-scripts": "^5.0.1",
+    "typescript": "^4.9.3",
+    "webpack": "^5.75.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -23,6 +25,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "sass": "sass src/Sass:src/Css --watch --no-source-map"
+  },
+  "engines": {
+    "node": ">=14",
+    "npm": "8.1.2"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -41,8 +47,14 @@
   },
   "devDependencies": {
     "@types/react-html-parser": "^2.0.2",
-    "@types/react-router-dom": "^5.1.8",
+    "@types/react-router-dom": "^5.3.3",
     "ncp": "^2.0.0",
-    "sass": "^1.38.1"
+    "sass": "^1.56.1",
+    "yarn-upgrade-all": "^0.7.1"
+  },
+  "resolutions": {
+    "postcss": "^8.2.13",
+    "css-select": "^2.1.0",
+    "nth-check": "^2.0.1"
   }
 }

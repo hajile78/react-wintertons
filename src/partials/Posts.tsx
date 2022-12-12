@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect} from 'react'
 import ReactHtmlParser from 'react-html-parser'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 type Props = {
   slug?: string
@@ -17,15 +17,20 @@ type Post = {
 
 const postsPerPage: number = 3
 
+
 function Posts(props: Props) {
   const [posts, setPosts] = useState<Post[]>([])
   const [totalPosts, setTotalPosts] = useState<Post[]>([])
   const [loading, setLoading] = useState<boolean>(true)
-  const { slug, id } = props
+  let {id, slug} = useParams()
   useEffect(() => {
     async function getPosts() {
       const server = 'https://apiwintertons.uc.r.appspot.com'
       //const server = 'http://localhost:5000'
+      if(!slug && !id) {
+        slug = "Main"
+        id = "Main"
+      }
       const endPoint = slug ? `postsBy/${slug}` : `getPost/${id}`
       const arrName = slug ? `posts` : `post`
       await fetch(`${server}/${endPoint}`)
@@ -67,6 +72,8 @@ function Posts(props: Props) {
     setTotalPosts([...totalPosts.slice(postsPerPage)])
   }
 
+  const createBody: any = (post: Post) => { return ReactHtmlParser(`<div className="postBody"> ${post.body}</div>`)}
+
   return (
     <article className="postArticle">
       {
@@ -83,7 +90,7 @@ function Posts(props: Props) {
                   {new Date(post.created).toDateString()}{' '}
                   {new Date(post.created).toLocaleTimeString()}
                 </p>
-                <div className="postBody">{ReactHtmlParser(post.body)}</div>
+                {createBody(post)}
               </div>
             )
           })
