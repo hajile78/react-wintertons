@@ -1,11 +1,7 @@
-import { useState, useEffect} from 'react'
+import { useState, useEffect, SetStateAction, Dispatch } from 'react'
 import ReactHtmlParser from 'react-html-parser'
 import { Link, useParams } from 'react-router-dom'
-
-type Props = {
-  slug?: string
-  id?: string
-}
+import { Quote } from './quoteForm/Quote'
 
 type Post = {
   id: string
@@ -15,15 +11,23 @@ type Post = {
   created: Date
 }
 
+interface PostQuote {
+  quotes: Quote[]
+  setQuote: Dispatch<SetStateAction<Quote>> 
+}
+
 const postsPerPage: number = 3
 
 
-function Posts(props: Props) {
+function Posts({quotes, setQuote}: PostQuote ) {
   const [posts, setPosts] = useState<Post[]>([])
   const [totalPosts, setTotalPosts] = useState<Post[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   let {id, slug} = useParams()
+
+  
   useEffect(() => {
+    setQuote(quotes[Math.floor(Math.random() * quotes.length)])
     async function getPosts() {
       const server = 'https://apiwintertons.uc.r.appspot.com'
       //const server = 'http://localhost:5000'
@@ -37,7 +41,7 @@ function Posts(props: Props) {
         .then((response) => response.json())
         .then((data) => {
           const postElem = data[arrName]
-          console.log(postElem)
+          // console.log(postElem)
           setPosts(
             postElem.reduce((a: Post[], c: Post, i: number) => {
               if (i < postsPerPage) {
@@ -61,7 +65,7 @@ function Posts(props: Props) {
         })
     }
     getPosts()
-  }, [slug, id])
+  }, [slug, id, setQuote])
 
   const showUser = (user: string) => (slug === 'Main' ? '' : `by ${user}`)
   const handelMoreClick = () => {
@@ -72,7 +76,7 @@ function Posts(props: Props) {
     setTotalPosts([...totalPosts.slice(postsPerPage)])
   }
 
-  const createBody: any = (post: Post) => { return ReactHtmlParser(`<div className="postBody"> ${post.body}</div>`)}
+  const createBody: any = (post: Post) => { return ReactHtmlParser(`<div classNName="postBody">${post.body}</div>`) }
 
   return (
     <article className="postArticle">
