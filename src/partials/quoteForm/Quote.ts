@@ -1,7 +1,9 @@
 export type Quote = {
-    quote: string;
-    author: string;
-};
+    [key: string]: any
+    quote?: string
+    author?: string
+}
+
 export type QuoteData = {
-    quotes: Quote[];
+    quotes: Quote[]
 };

@@ -3,7 +3,7 @@ import { Quote, QuoteData } from '../partials/quoteForm/Quote'
 
 const useGetQuotes = () => {
   const [quotes, setQuotes] = useState<Quote[]>([])
-  const [quote, setQuote] = useState<Quote>()
+  const [quote, setQuote] = useState<Quote>({})
 
   const getQuotes = async () => {
     const server = 'https://apiwintertons.uc.r.appspot.com'
@@ -32,7 +32,7 @@ const useGetQuotes = () => {
     }
   }, [setQuotes, setQuote])
 
-  return { quotes, quote }
+  return { quotes, quote, setQuote }
 }
 
 export default useGetQuotes

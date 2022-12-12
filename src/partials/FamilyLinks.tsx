@@ -4,7 +4,7 @@ import ModalContext from '../context/ModalContext'
 function FamilyLinks() {
   const obj = useContext(ModalContext)
   const { setShowModal, setModalText } = obj
-  console.log('ModalContext', JSON.stringify(obj))
+  // console.log('ModalContext', JSON.stringify(obj))
   const openModal = (e: React.MouseEvent) => {
     e.preventDefault()
     let header =
