@@ -27,7 +27,7 @@ function Posts({quotes, setQuote}: PostQuote ) {
 
   
   useEffect(() => {
-    setQuote(quotes[Math.floor(Math.random() * quotes.length)])
+    
     async function getPosts() {
       const server = 'https://apiwintertons.uc.r.appspot.com'
       //const server = 'http://localhost:5000'
@@ -65,7 +65,8 @@ function Posts({quotes, setQuote}: PostQuote ) {
         })
     }
     getPosts()
-  }, [slug, id, setQuote])
+    setQuote(quotes[Math.floor(Math.random() * quotes.length)])
+  }, [slug, id, quotes])
 
   const showUser = (user: string) => (slug === 'Main' ? '' : `by ${user}`)
   const handelMoreClick = () => {
