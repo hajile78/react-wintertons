@@ -11,6 +11,8 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
     "buffer": "^6.0.3",
+    "nth-check": "^2.0.1",
+    "postcss": "^8.2.13",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-html-parser": "^2.0.2",
