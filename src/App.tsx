@@ -56,7 +56,17 @@ function App() {
           <LinkQuote {...quote} />
         </ModalContext.Provider>
       </div>
-      <footer className="footer">Copyright © Wintertons.us 2020</footer>
+      <footer className="footer">Copyright © Wintertons.us 2020 | Built with  
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-11.5 -10.23174 23 20.46348">
+          <title>React Logo</title>
+          <circle cx="0" cy="0" r="2.05" fill="#61dafb"/>
+          <g stroke="#61dafb" stroke-width="1" fill="none">
+            <ellipse rx="11" ry="4.2"/>
+            <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
+            <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+          </g>
+        </svg>
+      </footer>
     </div>
   )
 }
