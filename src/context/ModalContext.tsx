@@ -1,11 +1,5 @@
 import { createContext } from 'react'
-type ModalContextType =
-  | {
-      showModal: boolean
-      setShowModal: () => void
-      modalText: {}
-      setModalText: () => void
-    }
-  | {}
-const ModalContext = createContext<ModalContextType>({})
+import { ModalContextType } from '../types/ModalContextType'
+
+const ModalContext = createContext<ModalContextType>(null)
 export default ModalContext
