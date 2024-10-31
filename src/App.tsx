@@ -13,7 +13,7 @@ import useGetQuotes from './hooks/useGetQuotes'
 
 function App() {
   const [showModal, setShowModal] = useState(false)
-  const [modalText, setModalText] = useState({})
+  const [modalText, setModalText] = useState({ header: '', body: '' })
   const { quote, quotes, setQuote } = useGetQuotes()
   //const [quote, setQuote] = useState<Quote>(inital)
 
