@@ -24,15 +24,15 @@
 .App-header {
   background-color: var(--blue-dark);
   min-height: var(--header-height);
-  display: flex;
+  display: grid;
   align-items: center;
   color: var(--orange-dark);
+  grid-template-columns: 0.5fr 3fr 0.125fr 1fr 0.5fr;
 
   .headerContainer {
-    margin: 0 auto;
     display: flex;
     align-items: baseline;
-    width: 80vw;
+    grid-column-start: 2;
   }
 
   .brand {
@@ -229,13 +229,14 @@ body {
 }
 
 #addQuotes {
-  width: 80%;
   fieldset {
     display: flex;
     flex-direction: column;
     align-content: center;
     justify-content: center;
     align-items: stretch;
+    gap: .5rem;
+    margin-bottom: .5rem;
   }
 }
 
@@ -382,5 +383,21 @@ body {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .App .container {
+    grid-template-columns: 0.5fr 3fr 0.5fr;
+  }
+
+  .linkQuote {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    margin-top: 1rem;
+  }
+
+  .App-header .items {
+    flex-wrap: wrap;
   }
 }
