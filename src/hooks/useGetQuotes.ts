@@ -12,27 +12,50 @@ const useGetQuotes = () => {
       .then((response) => response.json())
       .then((data: QuoteData) => {
         console.log('setting localstorage quotes')
+        setLocalStore('quotes', data.quotes, 30000)
         setQuotes(data.quotes)
-        localStorage.setItem('quotes', JSON.stringify(data.quotes))
       })
       .catch((e) => console.log(`Error Message ${e}`))
   }
 
   useEffect(() => {
-    const local: string | null = localStorage.getItem('quotes')
-    const qArr: Quote[] = local ? JSON.parse(local) : []
-    console.log(`qArr: ${qArr} local: ${local}`)
+    const qArr: Quote[] = getLocalStore('quotes')
+
     if (qArr && qArr.length > 0) {
-      console.log('setting useState Vars')
+      console.log('setting quote useState Vars')
       setQuotes(qArr)
       setQuote(qArr[Math.floor(Math.random() * qArr.length)])
     } else {
       console.log('getting localstorage quotes')
       getQuotes()
     }
-  }, [setQuotes, setQuote])
+  }, [])
 
   return { quotes, quote, setQuote }
+}
+
+const getLocalStore = (key: string): Quote[] => {
+  const local: string | null = localStorage.getItem(key)
+  const quotes: quoteData = JSON.parse(local ? local : '{}')
+  if (!quotes || new Date().getTime() > quotes.expiry) {
+    localStorage.removeItem(key) // Remove expired item
+    return []
+  }
+  return quotes.value
+}
+
+type quoteData = {
+  expiry: number
+  value: Quote[]
+}
+
+const setLocalStore = (key: string, value: any[], ttl: number): void => {
+  const data: quoteData = {
+    expiry: new Date().getTime() + ttl,
+    value: value,
+  }
+
+  localStorage.setItem(key, JSON.stringify(data))
 }
 
 export default useGetQuotes
