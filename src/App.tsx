@@ -18,7 +18,7 @@ function App() {
   //const [quote, setQuote] = useState<Quote>(inital)
 
   return (
-    <div className="App">
+    <div className="app">
       <ModalContext.Provider
         value={{ showModal, setShowModal, modalText, setModalText }}
       >
@@ -26,7 +26,7 @@ function App() {
       </ModalContext.Provider>
 
       <Header />
-      <div className="container">
+      
         <div className="main">
           <h1 className="blog-header">
             Wintertons.us <small>The Whole Famn Damily</small>
@@ -55,7 +55,7 @@ function App() {
         >
           <LinkQuote {...quote} />
         </ModalContext.Provider>
-      </div>
+      
       <footer className="footer">
         Copyright © Wintertons.us 2020 | Built with
         <svg
