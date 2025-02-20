@@ -50,7 +50,7 @@
     "@vitest/coverage-v8": "^2.1.4",
     "jsdom": "^25.0.1",
     "sass-embedded": "^1.80.5",
-    "vitest": "^2.1.4"
+    "vitest": "^2.1.9"
   },
   "type": "module"
 }
