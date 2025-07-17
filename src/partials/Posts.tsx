@@ -29,7 +29,7 @@ function Posts({quotes, setQuote}: PostQuote ) {
   useEffect(() => {
     
     async function getPosts() {
-      const server = 'http://api.wintertons.us'
+      const server = 'https://api.wintertons.us'
       //const server = 'http://localhost:5000'
       if(!slug && !id) {
         slug = "Main"
