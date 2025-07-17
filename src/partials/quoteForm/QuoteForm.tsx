@@ -26,7 +26,7 @@ function QuoteForm() {
     console.log(
       `Button Clicked quote: ${e.currentTarget.quote.value} author: ${e.currentTarget.author.value}`
     )
-    const url = 'https://apiwintertons.uc.r.appspot.com/quote'
+    const url = 'http://api.wintertons.us/quote'
     fetch(url, {
       method: 'POST',
       headers: {
