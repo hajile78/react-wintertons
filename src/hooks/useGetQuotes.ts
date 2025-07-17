@@ -6,7 +6,7 @@ const useGetQuotes = () => {
   const [quote, setQuote] = useState<Quote>({})
 
   const getQuotes = async () => {
-    const server = 'https://apiwintertons.uc.r.appspot.com'
+    const server = 'https://api.wintertons.us'
     //const server = 'http://localhost:5000'
     await fetch(`${server}/quotes`)
       .then((response) => response.json())

@@ -29,7 +29,7 @@ const PostsForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<PostsForm>) => {
     e.preventDefault()
     const currentTarget = e.currentTarget
-    const url = 'https://apiwintertons.uc.r.appspot.com/post'
+    const url = 'http://api.wintertons.us/post'
     fetch(url, {
       method: 'POST',
       headers: {
