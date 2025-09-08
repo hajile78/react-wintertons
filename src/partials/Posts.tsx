@@ -30,6 +30,11 @@ function Posts({quotes, setQuote}: PostQuote ) {
   useEffect(() => {
     async function fetchPosts() {
       try {
+        if(!slug && !id) {
+          slug = "Main"
+          id = "Main"
+        }
+
         const data = await api.getPosts(slug, id)
         const arrName = slug ? 'posts' : 'post'
         const postElem = data[arrName]
