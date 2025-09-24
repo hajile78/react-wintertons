@@ -2,14 +2,8 @@ import { useState, useEffect, SetStateAction, Dispatch } from 'react'
 import ReactHtmlParser from 'react-html-parser'
 import { Link, useParams } from 'react-router-dom'
 import { Quote } from './quoteForm/Quote'
-
-type Post = {
-  id: string
-  body: string
-  title: string
-  user: string
-  created: Date
-}
+import { api } from '../services/api'
+import { Post } from '../types/Post'
 
 interface PostQuote {
   quotes: Quote[]
@@ -27,46 +21,37 @@ function Posts({quotes, setQuote}: PostQuote ) {
 
   
   useEffect(() => {
-    
-    async function getPosts() {
-      const server = 'https://api.wintertons.us'
-      //const server = 'http://localhost:5000'
-      if(!slug && !id) {
-        slug = "Main"
-        id = "Main"
+    async function fetchPosts() {
+      try {
+        if(!slug && !id) {
+          slug = "Main"
+        }
+
+        const data: Post[] = slug ? await api.getPosts(slug) : await api.getPost(id!)
+        const postElem = data.sort((a: Post, b: Post) => 
+          new Date(b.created).getTime() - new Date(a.created).getTime()
+        )
+
+        setPosts(
+          postElem.slice(0, postsPerPage)
+        )
+        setTotalPosts(
+          postElem.slice(postsPerPage)
+        )
+        setLoading(false)
+      } catch (e) {
+        setTotalPosts([])
+        setPosts([])
+        setLoading(false)
+        console.error('Error fetching posts:', e)
       }
-      const endPoint = slug ? `postsBy/${slug}` : `getPost/${id}`
-      const arrName = slug ? `posts` : `post`
-      await fetch(`${server}/${endPoint}`)
-        .then((response) => response.json())
-        .then((data) => {
-          const postElem = data[arrName]
-          // console.log(postElem)
-          setPosts(
-            postElem.reduce((a: Post[], c: Post, i: number) => {
-              if (i < postsPerPage) {
-                a.push(c)
-              }
-              return a
-            }, [])
-          )
-          setTotalPosts(
-            postElem.filter((v: Post, i: number) => {
-              return i >= postsPerPage
-            })
-          )
-		  setLoading(false)
-        })
-        .catch((e) => {
-          setTotalPosts([])
-          setPosts([])
-		  setLoading(false)
-          console.log(`Error Message ${e}`)
-        })
     }
-    getPosts()
-    setQuote(quotes[Math.floor(Math.random() * quotes.length)])
-  }, [slug, id, quotes])
+
+    fetchPosts()
+    if (quotes.length > 0) {
+      setQuote(quotes[Math.floor(Math.random() * quotes.length)])
+    }
+  }, [slug, id, quotes, postsPerPage])
 
   const showUser = (user: string) => (slug === 'Main' ? '' : `by ${user}`)
   const handelMoreClick = () => {

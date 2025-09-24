@@ -1,0 +1,63 @@
+form#addPostForm {
+  max-width: 600px;           /* keep form from stretching too wide */
+  margin: 2rem auto;          /* center form on page */
+  padding: 2rem;
+  background: #fff;           /* give contrast if background isn’t white */
+  border-radius: 1rem;        /* soft corners */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* subtle depth */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;                /* spacing between form elements */
+}
+
+form#addPostForm label {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+form#addPostForm input,
+form#addPostForm textarea,
+form#addPostForm select {
+  width: auto;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+form#addPostForm input:focus,
+form#addPostForm textarea:focus,
+form#addPostForm select:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74,144,226,0.2);
+  outline: none;
+}
+
+form#addPostForm textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+form#addPostForm button {
+  background: #4a90e2;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s ease;
+  align-self: flex-start; /* keeps button from stretching full width */
+}
+
+form#addPostForm button:hover {
+  background: #357ABD;
+}
+
+form#addPostForm fieldset > div {
+  display: flex;
+  flex-direction: column;
+}
