@@ -1,61 +1,72 @@
 import { useState, useEffect } from 'react'
 import { Quote, QuoteData } from '../partials/quoteForm/Quote'
+import { api } from '../services/api'
+
+const CACHE_KEY = 'quotes'
+const CACHE_TTL = 30000 // 30 seconds
+
+interface CacheData<T> {
+  expiry: number
+  value: T
+}
+
+const useLocalStorage = <T,>(key: string, ttl: number) => {
+  const get = (): T | null => {
+    const item = localStorage.getItem(key)
+    if (!item) return null
+    
+    const data: CacheData<T> = JSON.parse(item)
+    if (new Date().getTime() > data.expiry) {
+      localStorage.removeItem(key)
+      return null
+    }
+    return data.value
+  }
+
+  const set = (value: T): void => {
+    const data: CacheData<T> = {
+      expiry: new Date().getTime() + ttl,
+      value
+    }
+    localStorage.setItem(key, JSON.stringify(data))
+  }
+
+  return { get, set }
+}
 
 const useGetQuotes = () => {
   const [quotes, setQuotes] = useState<Quote[]>([])
   const [quote, setQuote] = useState<Quote>({})
+  const storage = useLocalStorage<Quote[]>(CACHE_KEY, CACHE_TTL)
 
   const getQuotes = async () => {
-    const server = 'https://api.wintertons.us'
-    //const server = 'http://localhost:5000'
-    await fetch(`${server}/quotes`)
-      .then((response) => response.json())
-      .then((data: QuoteData) => {
-        console.log('setting localstorage quotes')
-        setLocalStore('quotes', data.quotes, 30000)
-        setQuotes(data.quotes)
-      })
-      .catch((e) => console.log(`Error Message ${e}`))
+    try {
+      const data = await api.getQuotes()
+      storage.set(data.quotes)
+      setQuotes(data.quotes)
+      setRandomQuote(data.quotes)
+    } catch (error) {
+      console.error('Failed to fetch quotes:', error)
+    }
+  }
+
+  const setRandomQuote = (quotesArray: Quote[]) => {
+    if (quotesArray.length > 0) {
+      setQuote(quotesArray[Math.floor(Math.random() * quotesArray.length)])
+    }
   }
 
   useEffect(() => {
-    const qArr: Quote[] = getLocalStore('quotes')
-
-    if (qArr && qArr.length > 0) {
-      console.log('setting quote useState Vars')
-      setQuotes(qArr)
-      setQuote(qArr[Math.floor(Math.random() * qArr.length)])
+    const cachedQuotes = storage.get()
+    if (cachedQuotes?.length) {
+      setQuotes(cachedQuotes)
+      setRandomQuote(cachedQuotes)
     } else {
-      console.log('getting localstorage quotes')
       getQuotes()
     }
   }, [])
 
   return { quotes, quote, setQuote }
-}
-
-const getLocalStore = (key: string): Quote[] => {
-  const local: string | null = localStorage.getItem(key)
-  const quotes: quoteData = JSON.parse(local ? local : '{}')
-  if (!quotes || new Date().getTime() > quotes.expiry) {
-    localStorage.removeItem(key) // Remove expired item
-    return []
-  }
-  return quotes.value
-}
-
-type quoteData = {
-  expiry: number
-  value: Quote[]
-}
-
-const setLocalStore = (key: string, value: any[], ttl: number): void => {
-  const data: quoteData = {
-    expiry: new Date().getTime() + ttl,
-    value: value,
-  }
-
-  localStorage.setItem(key, JSON.stringify(data))
 }
 
 export default useGetQuotes
