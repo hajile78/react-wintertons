@@ -1,3 +1,5 @@
+import { Post } from "../types/Post"
+
 const API_BASE_URL = 'https://api.wintertons.us'
 
 export const api = {
@@ -46,13 +48,15 @@ export const api = {
     return response.json()
   },
 
-  async getPosts(slug?: string, id?: string) {
-    if (!slug && !id) {
-      slug = "Main"
-      id = "Main"
-    }
-    const endPoint = slug ? `postsBy/${slug}` : `getPost/${id}`
-    const response = await fetch(`${API_BASE_URL}/${endPoint}`)
-    return response.json()
+  async getPosts(slug: string): Promise<Post[]> {
+    const response = await fetch(`${API_BASE_URL}/postsBy/${slug}`)
+    const data = await response.json()
+    return data.posts
+  },
+
+  async getPost(id: string): Promise<Post[]> {
+    const response = await fetch(`${API_BASE_URL}/getPost/${id}`)
+    const data = await response.json()
+    return data.post
   }
 }

@@ -3,14 +3,7 @@ import ReactHtmlParser from 'react-html-parser'
 import { Link, useParams } from 'react-router-dom'
 import { Quote } from './quoteForm/Quote'
 import { api } from '../services/api'
-
-type Post = {
-  id: string
-  body: string
-  title: string
-  user: string
-  created: Date
-}
+import { Post } from '../types/Post'
 
 interface PostQuote {
   quotes: Quote[]
@@ -32,12 +25,12 @@ function Posts({quotes, setQuote}: PostQuote ) {
       try {
         if(!slug && !id) {
           slug = "Main"
-          id = "Main"
         }
 
-        const data = await api.getPosts(slug, id)
-        const arrName = slug ? 'posts' : 'post'
-        const postElem = data[arrName]
+        const data: Post[] = slug ? await api.getPosts(slug) : await api.getPost(id!)
+        const postElem = data.sort((a: Post, b: Post) => 
+          new Date(b.created).getTime() - new Date(a.created).getTime()
+        )
 
         setPosts(
           postElem.slice(0, postsPerPage)

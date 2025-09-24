@@ -2,6 +2,7 @@ import { useState, FormEvent } from 'react'
 import CSS from 'csstype'
 import Form from '../components/common/Form'
 import { api } from '../services/api'
+import '../partials/css/postForm.css'
 
 const styles: CSS.Properties = {
   display: 'flex',
@@ -9,6 +10,7 @@ const styles: CSS.Properties = {
   alignContent: 'center',
   justifyContent: 'center',
   alignItems: 'stretch',
+  gap: '1rem',
 }
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -27,6 +29,10 @@ const PostsForm: React.FC = () => {
   const handleSubmit = async (e: FormEvent<PostsFormElement>) => {
     e.preventDefault()
     const currentTarget = e.currentTarget
+    if (currentTarget.postTitle.value === '' || currentTarget.post.value === '' || currentTarget.author.value === '') {
+      setAlert({ show: true, type: 'danger', message: 'Please fill in all fields' })
+      return
+    }
     
     try {
       await api.addPost(
@@ -54,10 +60,15 @@ const PostsForm: React.FC = () => {
       alert={alert}
     >
       <fieldset style={styles}>
-        <label htmlFor="postTitle">Title</label>
-        <input type="text" name="postTitle" required />
-        <label htmlFor="post">Post Body</label>
-        <textarea name="post" style={{ height: '33vh' }} required></textarea>
+        <div>
+          <label htmlFor="postTitle">Title</label>
+          <input type="text" name="postTitle" required />
+        </div>
+        <div>
+          <label htmlFor="post">Post Body</label>
+          <textarea name="post" style={{ height: '33vh' }} required></textarea>
+        </div>
+        <div>  
         <label htmlFor="author">Author</label>
         <select name="author" required>
           <option value="">Select an author</option>
@@ -67,6 +78,7 @@ const PostsForm: React.FC = () => {
           <option value="Sam">Sam</option>
           <option value="Ben">Ben</option>
         </select>
+        </div>
       </fieldset>
     </Form>
   )
