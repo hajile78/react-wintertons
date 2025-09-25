@@ -10,9 +10,8 @@ function Header() {
         </a>
       </div>
       
-      <label htmlFor="menu-toggle">X</label>
       <input type="checkbox" name="menu-toggle" id="menu-toggle" />
-      
+      <label htmlFor="menu-toggle"></label>      
        
       <nav className="menu">
         <ul className="items">
