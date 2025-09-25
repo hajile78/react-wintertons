@@ -372,7 +372,15 @@ body {
 
 /* show menu when checkbox is checked */
 #menu-toggle:checked ~ .menu {
-  max-height: 500px; /* big enough to show all items */
+  max-height: 300px; /* big enough to show all items */
+}
+
+input#menu-toggle:checked + label::before {
+  content: "✕"; 
+}
+
+label[for="menu-toggle"]::before {
+  content: "☰";
 }
 
 /* Desktop view */
