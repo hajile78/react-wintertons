@@ -9,6 +9,11 @@ function Header() {
           <span>Wintertons.us</span>
         </a>
       </div>
+      
+      <label htmlFor="menu-toggle">X</label>
+      <input type="checkbox" name="menu-toggle" id="menu-toggle" />
+      
+       
       <nav className="menu">
         <ul className="items">
           <li className="item">
