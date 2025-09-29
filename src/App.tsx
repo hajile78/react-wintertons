@@ -10,6 +10,7 @@ import useGetQuotes from './hooks/useGetQuotes'
 import { createRoutes } from './routes'
 import ErrorBoundary from './components/common/ErrorBoundary'
 import ErrorFallback from './components/common/ErrorFallback'
+import { AuthProvider } from './context/AuthContext.js'
 
 function App() {
   const [showModal, setShowModal] = useState(false)
@@ -17,6 +18,7 @@ function App() {
   const { quote, quotes, setQuote } = useGetQuotes()
 
   return (
+    <AuthProvider>
     <ErrorBoundary fallback={<ErrorFallback />}>
       <ModalContext.Provider
         value={{ showModal, setShowModal, modalText, setModalText }}
@@ -61,6 +63,7 @@ function App() {
       </div>
       </ModalContext.Provider>
     </ErrorBoundary>
+    </AuthProvider>
   )
 }
 
