@@ -15,28 +15,35 @@ function Header() {
        
       <nav className="menu">
         <ul className="items">
-          <li className="item">
+          <li className="item" onClick={() => closeMenu()}>
             <Link to={'/#'}>Home</Link>
           </li>
-          <li className="item">
+          <li className="item"  onClick={() => closeMenu()}>
             <Link to={'/nav/Elijah'}>Elijah</Link>
           </li>
-          <li className="item">
+          <li className="item"  onClick={() => closeMenu()}>
             <Link to={'/nav/Katie'}>Katie</Link>
           </li>
-          <li className="item">
+          <li className="item" onClick={() => closeMenu()}>
             <Link to={'/nav/Kalob'}>Kalob</Link>
           </li>
-          <li className="item">
+          <li className="item"  onClick={() => closeMenu()}>
             <Link to={'/nav/Sam'}>Sam</Link>
           </li>
-          <li className="item">
+          <li className="item" onClick={() => closeMenu()}>
             <Link to={'/nav/Ben'}>Ben</Link>
           </li>
         </ul>
       </nav>
     </header>
   )
+
+  function closeMenu(){
+    
+      const checkbox = document.getElementById('menu-toggle') as HTMLInputElement
+      checkbox.checked = false
+    
+  }
 }
 
 export default Header
