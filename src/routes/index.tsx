@@ -5,7 +5,6 @@ import PostsForm from '../partials/PostsForm'
 import { Quote } from '../partials/quoteForm/Quote'
 import { Dispatch, SetStateAction } from 'react'
 import ProtectedRoute from '../components/ProtectedRoute'
-import path from 'path'
 import Login from '../components/Login'
 
 export const createRoutes = (quotes: Quote[], setQuote: Dispatch<SetStateAction<Quote>>) => {
