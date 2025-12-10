@@ -1,5 +1,4 @@
 import { useState, useEffect, SetStateAction, Dispatch } from 'react'
-import ReactHtmlParser from 'react-html-parser'
 import { Link, useParams } from 'react-router-dom'
 import { Quote } from './quoteForm/Quote'
 import { api } from '../services/api'
@@ -62,8 +61,6 @@ function Posts({quotes, setQuote}: PostQuote ) {
     setTotalPosts([...totalPosts.slice(postsPerPage)])
   }
 
-  const createBody: any = (post: Post) => { return ReactHtmlParser(`<div classNName="postBody">${post.body}</div>`) }
-
   return (
     <article className="postArticle">
       {
@@ -80,7 +77,7 @@ function Posts({quotes, setQuote}: PostQuote ) {
                   {new Date(post.created).toDateString()}{' '}
                   {new Date(post.created).toLocaleTimeString()}
                 </p>
-                {createBody(post)}
+                <div dangerouslySetInnerHTML={{ __html: post.body }} />
               </div>
             )
           })

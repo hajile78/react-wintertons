@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import './css/Modal.css'
-import ReactHtmlParser from 'react-html-parser'
 import ModalContext from '../context/ModalContext'
 
 const Modal = () => {
@@ -17,7 +16,7 @@ const Modal = () => {
               &times;
             </button>
             <h3>{modalText && modalText.header}</h3>
-            <>{modalText && ReactHtmlParser(modalText.body)}</>
+            {modalText && <div dangerouslySetInnerHTML={{ __html: modalText.body }} />}
           </div>
         </div>
       )
