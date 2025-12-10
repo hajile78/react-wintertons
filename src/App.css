@@ -1,12 +1,24 @@
 :root {
   --header-height: 10vh;
-  --font-size: clamp(0.9rem, 2.5rem, calc(var(--header-height) * 0.16));
+  --font-size: clamp(0.9rem, 2.5vw, 1.2rem);
 
-  /* Color Pallet */
-  --blue-light: rgb(18, 103, 130);
-  --blue-dark: rgb(2, 48, 71);
-  --bk-blue: rgb(142, 202, 230);
-  --orange-dark: rgb(255, 183, 3);
+  /* Color Palette - improved contrast */
+  --blue-light: #1267a8;
+  --blue-dark: #023047;
+  --bk-blue: #8ecae6;
+  --orange-dark: #ffb703;
+  --orange-accent: #fb8500;
+  
+  /* Modern additions */
+  --text-primary: #2d3748;
+  --text-secondary: #718096;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f7fafc;
+  --border-color: #e2e8f0;
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --border-radius: 8px;
+  --transition: all 0.3s ease;
 }
 
 .app {
@@ -29,12 +41,21 @@
   display: flex;
   justify-content: space-between;
   padding: 0 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
 
   .brand {
-    font-size: calc(var(--header-height) * 0.4);
+    font-size: clamp(1.25rem, 4vw, 2rem);
     a {
       color: var(--orange-dark);
       text-decoration: none;
+      transition: var(--transition);
+      &:hover {
+        color: var(--orange-accent);
+      }
     }
   }
 
@@ -115,8 +136,12 @@
 }
 
 .post-img {
-  max-height: 33vh;
-  max-width: 90vw;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  display: block;
+  margin: 1rem 0;
 }
 
 .postBody:after {
@@ -176,22 +201,31 @@ button.link {
   font-family: 'Verdana' sans-serif;
   font-size: 1em;
   text-align: left;
-  color: blue;
+  color: var(--blue-light);
   background: none;
   margin: 0;
-  padding: 0;
+  padding: 0.25rem 0;
   border: none;
   cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: var(--transition);
 
   -moz-user-select: text;
+
+  &:hover {
+    color: var(--blue-dark);
+    border-bottom-color: var(--orange-accent);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--orange-dark);
+    outline-offset: 2px;
+  }
 
   /* override all your button styles here if there are any others */
 }
 button.link {
   text-decoration: underline;
-}
-button.link:hover {
-  color: #282c34;
 }
 
 body {
@@ -383,10 +417,31 @@ label[for="menu-toggle"]::before {
   content: "☰";
 }
 
+.main,
+.quote,
+.links {
+  background-color: var(--bg-primary);
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+}
+
 /* Desktop view */
 @media (min-width: 768px) {
   .app-header {
     flex-wrap: nowrap;
+    padding: 1rem;
+  }
+
+  .post-img {
+    max-height: 40vh;
+    object-fit: cover;
   }
 
   .app-header label {
@@ -412,6 +467,13 @@ label[for="menu-toggle"]::before {
 
   .menu li a {
     padding: 0.5rem 0;
+  }
+
+  .menu li a,
+  button {
+    min-height: 44px; /* iOS touch target */
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -519,6 +581,17 @@ label[for="menu-toggle"]::before {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  .app {
+    grid-template-areas:
+      'header header header'
+      'main main aside';
+    grid-template-columns: 2fr 1fr;
+    gap: 0.75rem;
+    padding: 0 1rem;
   }
 }
 
