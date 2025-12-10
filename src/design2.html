@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MyBlog — Design 2 Preview</title>
+
+  <!-- Basic system fonts for fast load; replace with Google Fonts if desired -->
+  <style>
+    :root{
+      --bg: #f0f2f5;
+      --surface: #fff;
+      --muted: #6b7280;
+      --accent-1: #fb8500;
+      --accent-2: #023047;
+      --radius-md: 12px;
+      --max-width: 1200px;
+
+      /* rhythm */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+    }
+
+    /* reset + base */
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      background:var(--bg);
+      color:#0f172a;
+      line-height:1.5;
+      -webkit-text-size-adjust:100%;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;height:auto;display:block}
+
+    /* Hero header */
+    .hero {
+      background: linear-gradient(1deg, var(--accent-1), var(--accent-2));
+      color: white;
+      padding: calc(var(--space-lg) * 1.6) var(--space-md) calc(var(--space-xl) * 1.1);
+    }
+    .hero .nav-wrap{
+      max-width:var(--max-width);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      padding:0 var(--space-md);
+    }
+
+    .logo{
+      display:flex;align-items:center;gap:.6rem;font-weight:700;font-size:1.125rem;
+    }
+    .logo .mark{
+      width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.12);display:inline-grid;place-items:center;font-weight:700;
+    }
+
+    /* nav */
+    .nav {
+      display:flex;gap:1rem;align-items:center;
+    }
+    .nav a{
+      padding:.45rem .65rem;border-radius:8px;font-weight:600;
+    }
+    .nav a:hover{background:rgba(255,255,255,.06)}
+    /* hamburger - mobile */
+    .menu-toggle{
+      display:grid;place-items:center;width:44px;height:44px;border-radius:10px;background:transparent;border:0;color:white;
+    }
+    .menu-toggle:focus{outline:3px solid rgba(255,255,255,.12)}
+
+    /* hero text */
+    .hero-main{
+      max-width:var(--max-width);
+      margin:1.25rem auto 0;
+      padding:0 var(--space-md);
+      text-align:center;
+    }
+    .hero h1{font-size:1.5rem;margin:.25rem 0 0.25rem;line-height:1.05}
+    .hero p{margin:0.4rem 0 0;color:rgba(255,255,255,.9);font-weight:500}
+
+    /* floating content wrapper */
+    .content-wrap{
+      max-width:var(--max-width);
+      margin: -2.25rem auto 3rem; /* negative to lift above hero */
+      padding: 0 var(--space-md);
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:1.25rem;
+    }
+
+    @media(min-width:900px){
+      .hero h1{font-size:2.1rem}
+      .hero p{font-size:1rem}
+      .content-wrap{grid-template-columns: 2fr 1fr; gap:2rem}
+    }
+
+    /* Post area */
+    .posts{
+      display:flex;flex-direction:column;gap:1rem;
+    }
+    .post-card{
+      background:var(--surface);
+      border-radius:var(--radius-lg);
+      padding:1.25rem;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.06);
+      border:1px solid rgba(15,23,42,0.03);
+    }
+    .post-card .meta{font-size:.875rem;color:var(--muted);margin-bottom:.6rem}
+    .post-card h2{margin:.15rem 0 .6rem;font-size:1.25rem}
+    .post-card p{margin:0;font-size:1rem;color:#0b1220;opacity:.95}
+
+    /* excerpt card row (example) */
+    .post-list{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:1rem;
+      margin-top:1rem;
+    }
+    @media(min-width:700px){
+      .post-list{grid-template-columns:repeat(2,1fr)}
+    }
+    .teaser{
+      background:var(--surface);
+      border-radius:12px;
+      padding:1rem;
+      border:1px solid rgba(2,6,23,0.04);
+      box-shadow: 0 8px 18px rgba(2,6,23,0.04);
+    }
+
+    /* sidebar */
+    .sidebar{
+      display:flex;flex-direction:column;gap:1rem;
+      align-self:start;
+    }
+    .widget{
+      background:var(--surface);
+      border-radius:var(--radius-md);
+      padding:1rem;
+      border:1px solid rgba(2,6,23,0.04);
+    }
+    .widget h3{margin:.2rem 0 .6rem;font-size:1rem}
+    .widget a{display:block;padding:.35rem 0;color:#0b1220}
+
+    /* footer */
+    .site-footer{
+      margin-top:2rem;padding:2rem 0;background:transparent;color:var(--muted);
+      text-align:center;font-size:.95rem;
+    }
+
+    /* responsive nav behavior */
+    .nav-desktop{display:none}
+    .nav-mobile{display:flex;gap:.35rem;align-items:center}
+    .mobile-menu{
+      position:fixed;inset:0;display:none;align-items:flex-start;padding:4rem 1.25rem 1.25rem;background:linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.85));
+      z-index:60;color:#fff;
+    }
+    .mobile-menu .links{display:flex;flex-direction:column;gap:1rem;font-weight:700}
+    .mobile-menu .close{margin-left:auto}
+
+    @media(min-width:900px){
+      .nav-desktop{display:flex}
+      .nav-mobile{display:none}
+      .mobile-menu{display:none !important}
+    }
+
+    /* small helpers */
+    .container{max-width:var(--max-width);margin:0 auto}
+    .muted{color:var(--muted)}
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero" role="banner">
+    <div class="nav-wrap">
+      <div class="logo" aria-hidden="true">
+        <span class="mark">MB</span>
+        <span>MyBlog</span>
+      </div>
+
+      <!-- desktop nav -->
+      <nav class="nav nav-desktop" aria-label="Primary navigation">
+        <a href="#" aria-current="page">Home</a>
+        <a href="#">Posts</a>
+        <a href="#">Projects</a>
+        <a href="#">Contact</a>
+      </nav>
+
+      <!-- mobile nav -->
+      <div class="nav-mobile" aria-hidden="false">
+        <button class="menu-toggle" id="openMenu" aria-controls="mobileMenu" aria-expanded="false" title="Open menu">
+          <!-- simple hamburger icon -->
+          <svg width="18" height="12" viewBox="0 0 18 12" fill="none" aria-hidden="true"><rect width="18" height="2" rx="1" y="0" fill="currentColor"/><rect width="18" height="2" rx="1" y="5" fill="currentColor"/><rect width="18" height="2" rx="1" y="10" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="hero-main" role="region" aria-label="Introduction">
+      <h1>Welcome to My Modern Blog</h1>
+      <p>Clean design, soft cards, and readable content — built mobile-first and ready to customize.</p>
+    </div>
+  </header>
+
+  <!-- mobile overlay menu -->
+  <div id="mobileMenu" class="mobile-menu" role="dialog" aria-modal="true" style="display:none;">
+    <div style="width:100%;max-width:480px">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">
+        <div style="font-weight:700;font-size:1.15rem">MyBlog</div>
+        <button class="menu-toggle close" id="closeMenu" aria-label="Close menu" style="background:transparent;border:0;color:#fff">
+          ✕
+        </button>
+      </div>
+      <nav class="links" aria-label="Mobile primary">
+        <a href="#" style="font-size:1.15rem">Home</a>
+        <a href="#" style="font-size:1.15rem">Posts</a>
+        <a href="#" style="font-size:1.15rem">Projects</a>
+        <a href="#" style="font-size:1.15rem">Contact</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main id="main" class="content-wrap" role="main">
+    <!-- posts column -->
+    <section class="posts" aria-label="Blog posts">
+      <!-- featured post card -->
+      <article class="post-card" aria-labelledby="post1-title">
+        <div class="meta">April 5, 2025 · 6 min read</div>
+        <h2 id="post1-title">How to build a modern blog layout</h2>
+        <p>
+          This sample post showcases the floating card layout: a large featured card sits above a grid of teaser cards.
+          It’s easy to adapt for your content and will look crisp on phones and desktops.
+        </p>
+      </article>
+
+      <!-- teaser list -->
+      <div class="post-list" aria-hidden="false">
+        <article class="teaser" aria-labelledby="t1">
+          <h4 id="t1" style="margin:.1rem 0 .5rem">Designing for readable lines</h4>
+          <p class="muted" style="margin:0">Short excerpt to show the card style and balance of text and whitespace.</p>
+        </article>
+
+        <article class="teaser" aria-labelledby="t2">
+          <h4 id="t2" style="margin:.1rem 0 .5rem">Fluid sizing & spacing</h4>
+          <p class="muted" style="margin:0">Cards respond nicely to different viewport widths without breaking the rhythm.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- sidebar -->
+    <aside class="sidebar" aria-label="Sidebar">
+      <div class="widget">
+        <h3>About</h3>
+        <p class="muted" style="margin:0">A short bio or description of the blog. Keep intro text concise — readers scan here quickly.</p>
+      </div>
+
+      <div class="widget" aria-labelledby="recent">
+        <h3 id="recent">Recent Posts</h3>
+        <a href="#">Another Post</a>
+        <a href="#">Latest News</a>
+        <a href="#">More Stories</a>
+      </div>
+
+      <div class="widget" aria-labelledby="categories">
+        <h3 id="categories">Categories</h3>
+        <a href="#">General</a>
+        <a href="#">News</a>
+        <a href="#">Articles</a>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      © 2025 MyBlog — All rights reserved
+    </div>
+  </footer>
+
+  <!-- tiny script for menu toggle -->
+  <script>
+    (function(){
+      const open = document.getElementById('openMenu');
+      const close = document.getElementById('closeMenu');
+      const menu = document.getElementById('mobileMenu');
+
+      function openMenu(){
+        menu.style.display = 'flex';
+        open.setAttribute('aria-expanded','true');
+        // trap focus if needed (omitted for brevity)
+      }
+      function closeMenu(){
+        menu.style.display = 'none';
+        open.setAttribute('aria-expanded','false');
+        open.focus();
+      }
+
+      open.addEventListener('click',openMenu);
+      close.addEventListener('click',closeMenu);
+
+      // close when clicking outside small overlay area
+      menu.addEventListener('click', (e)=>{
+        if(e.target === menu) closeMenu();
+      });
+
+      // keyboard escape to close
+      document.addEventListener('keydown', (e)=>{
+        if(e.key === 'Escape' && menu.style.display === 'flex') closeMenu();
+      });
+    })();
+  </script>
+</body>
+</html>
