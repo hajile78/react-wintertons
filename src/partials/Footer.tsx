@@ -1,8 +1,8 @@
 function Footer() {
 	return (
-		<footer className='w-full bg-gray-900 py-10 mt-auto'>
+		<footer className='w-full bg-sky-950 py-5 z-50 mt-auto'>
 			<div className='max-w-7xl mx-auto px-6 text-center'>
-				<p className='text-sm flex items-center justify-center gap-2 text-white'>
+				<p className='font-bold text-sm flex items-center justify-center gap-2 text-[#fb8500]'>
 					<span>Copyright © Wintertons.us 2020 | Built with</span>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'

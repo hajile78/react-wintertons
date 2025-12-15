@@ -54,7 +54,7 @@ function Posts({ quotes, setQuote }: PostQuote) {
 		}
 	}, [slug, id, quotes, postsPerPage])
 
-	const showUser = (user: string) => (slug === 'Main' ? '' : `by ${user}`)
+	const showUser = (user: string) => (user === 'Main' ? '' : `by ${user}`)
 	const handelMoreClick = () => {
 		const morePosts = totalPosts.filter((v: Post, i: number) => {
 			return i < postsPerPage
@@ -80,24 +80,28 @@ function Posts({ quotes, setQuote }: PostQuote) {
 										<Link to={'/post/' + post.id}>{post.title}</Link>
 									</h3>
 									<p className='lead'>{showUser(post.user)}</p>
-									<p className='mb-2'>
-										<svg
-											xmlns='www.w3.org'
-											fill='none'
-											viewBox='0 0 24 24'
-											stroke-width='1.5'
-											stroke='currentColor'
-											className='w-6 h-6 inline-block mr-1'
-										>
-											<path
-												stroke-linecap='round'
-												stroke-linejoin='round'
-												d='M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z'
-											/>
-										</svg>{' '}
-										{new Date(post.created).toDateString()}{' '}
-										{new Date(post.created).toLocaleTimeString()}
-									</p>
+									{post.user !== 'Main' ? (
+										<p className='mb-2'>
+											<svg
+												xmlns='www.w3.org'
+												fill='none'
+												viewBox='0 0 24 24'
+												stroke-width='1.5'
+												stroke='currentColor'
+												className='w-6 h-6 inline-block mr-1'
+											>
+												<path
+													stroke-linecap='round'
+													stroke-linejoin='round'
+													d='M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z'
+												/>
+											</svg>{' '}
+											{new Date(post.created).toDateString()}{' '}
+											{new Date(post.created).toLocaleTimeString()}
+										</p>
+									) : (
+										''
+									)}
 									<p
 										className='mb-4 mt-4'
 										dangerouslySetInnerHTML={{ __html: post.body }}

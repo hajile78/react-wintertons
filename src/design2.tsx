@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
-import HeaderNew from './partials/HeaderNew'
+import Header from './partials/Header'
 import useGetQuotes from './hooks/useGetQuotes'
 import { createRoutes } from './routes'
 import Links from './partials/Links'
@@ -15,16 +15,7 @@ export default function Design2Layout() {
 	return (
 		<>
 			{/* Header */}
-			<HeaderNew />
-
-			{/* Hero Section */}
-			{/* <section className='w-full text-white pt-28 pb-14 bg-[linear-gradient(180deg,#1e40af,#1e40af,#fb8500)]'>
-				<div className='max-w-6xl mx-auto px-6 text-left'>
-					<p className='text-xl md:text-2xl opacity-90 max-w-2xl mx-auto'>
-						Wintertons.us The Whole Famn Damily
-					</p>
-				</div>
-			</section> */}
+			<Header />
 
 			{/* Main Layout */}
 			<main className='max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-10 mt-20 pb-20'>
