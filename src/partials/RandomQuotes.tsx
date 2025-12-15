@@ -21,7 +21,7 @@ function RandomQuotes(quote: Quote) {
 					</CardContent>
 				</Card>
 			) : (
-				<></>
+				<>...Loading</>
 			)}
 		</div>
 	)
