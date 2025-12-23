@@ -32,10 +32,8 @@ function Posts({ quotes, setQuote }: PostQuote) {
 				const data: Post[] = slug
 					? await api.getPosts(slug)
 					: await api.getPost(id!)
-				const postElem = data.sort(
-					(a: Post, b: Post) =>
-						new Date(b.created).getTime() - new Date(a.created).getTime()
-				)
+				const postElem =
+					slug === 'Main' ? data.sort(sortDataAsc) : data.sort(sortDataDesc)
 
 				setPosts(postElem.slice(0, postsPerPage))
 				setTotalPosts(postElem.slice(postsPerPage))
@@ -45,6 +43,13 @@ function Posts({ quotes, setQuote }: PostQuote) {
 				setPosts([])
 				setLoading(false)
 				console.error('Error fetching posts:', e)
+			}
+
+			function sortDataAsc(b: Post, a: Post): number {
+				return new Date(b.created).getTime() - new Date(a.created).getTime()
+			}
+			function sortDataDesc(b: Post, a: Post): number {
+				return new Date(a.created).getTime() - new Date(b.created).getTime()
 			}
 		}
 
