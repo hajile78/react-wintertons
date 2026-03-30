@@ -17,10 +17,14 @@ function Form<T extends HTMLFormElement = HTMLFormElement>({
   id, 
   title 
 }: FormProps<T>) {
+  const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+    onSubmit(e as FormEvent<T>)
+  }
+
   return (
     <>
       <h2>{title}</h2>
-      <form id={id} onSubmit={onSubmit} autoComplete="off">
+      <form id={id} onSubmit={handleFormSubmit} autoComplete="off">
         {alert.show && <Alert {...alert} removeAlert={() => {}} />}
         {children}
         <button type="submit">Submit</button>
