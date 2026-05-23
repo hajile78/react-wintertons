@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
 import Header from './Header'
@@ -9,7 +8,6 @@ import Footer from './Footer'
 import RandomQuotes from './RandomQuotes'
 
 export default function Layout() {
-	const [menuOpen, setMenuOpen] = useState(false)
 	const { quote, quotes, setQuote } = useGetQuotes()
 
 	return (

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 type Props = {
   type: string,
@@ -8,10 +8,13 @@ type Props = {
 
 const Alert = ({ type, message, removeAlert }: Props) => {
   useEffect(() => {
-    const timeout = setTimeout(() => { removeAlert() }, 2500)
+    const timeout = setTimeout(() => {
+      removeAlert()
+    }, 2500)
     return () => clearTimeout(timeout)
-  })
-  return (<p className={`alert alert-${type}`}>{message}</p>)
+  }, [removeAlert])
+
+  return <p className={`alert alert-${type}`}>{message}</p>
 }
 
 export default Alert
