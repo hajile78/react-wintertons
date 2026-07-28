@@ -55,12 +55,12 @@ confirms they can be deleted safely.
 
 These tests establish the contracts that hooks and components depend on.
 
-- [ ] **T1.1 - Class-name utility**
+- [x] **T1.1 - Class-name utility**
   - Target: `src/lib/utils.test.ts`
   - Test `cn` with conditional classes and conflicting Tailwind classes.
   - Verify later Tailwind utilities win.
 
-- [ ] **T1.2 - API service request contracts**
+- [x] **T1.2 - API service request contracts**
   - Target: `src/services/api.test.ts`
   - Mock `global.fetch`; do not call `api.wintertons.us`.
   - Test URLs and response mapping for `getQuotes`, `getPosts`, and `getPost`.
@@ -70,7 +70,7 @@ These tests establish the contracts that hooks and components depend on.
   - Record the desired behavior for non-OK GETs and invalid JSON; the current
     implementation does not check `response.ok` for reads.
 
-- [ ] **T1.3 - Authentication service**
+- [x] **T1.3 - Authentication service**
   - Target: `src/services/auth.test.ts`
   - Mock `better-auth/react` before importing the module.
   - Test that client creation uses `VITE_BETTER_AUTH_URL` and the fallback URL.
@@ -78,7 +78,7 @@ These tests establish the contracts that hooks and components depend on.
   - Test `hasRole` for a matching role, missing role, empty roles, malformed
     roles, and null/undefined users.
 
-- [ ] **T1.4 - Quote cache and retrieval hook**
+- [x] **T1.4 - Quote cache and retrieval hook**
   - Target: `src/hooks/useGetQuotes.test.tsx`
   - With valid cached quotes: avoid the API, expose cached quotes, and select a
     deterministic random quote.
@@ -90,7 +90,7 @@ These tests establish the contracts that hooks and components depend on.
   - On API rejection: verify the chosen error behavior and no corrupt cache write.
   - Use fake time and a mocked `Math.random`; restore both after every test.
 
-- [ ] **T1.5 - Auth context**
+- [x] **T1.5 - Auth context**
   - Target: `src/context/AuthContext.test.tsx`
   - Mock `authClient.useSession` and auth service functions.
   - Test anonymous and authenticated context values.
