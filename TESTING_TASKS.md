@@ -108,7 +108,7 @@ These should be fast DOM tests with dependencies passed as props or context.
     disabled behavior, and `Button`'s `asChild` rendering.
   - Keep these tests small; third-party library behavior is out of scope.
 
-- [ ] **T2.2 - Alert and shared Form**
+- [x] **T2.2 - Alert and shared Form**
   - Targets: `src/partials/Alert.test.tsx`,
     `src/components/common/Form.test.tsx`
   - Alert: render message/type class, dismiss after 2.5 seconds, cancel timer on
@@ -116,23 +116,23 @@ These should be fast DOM tests with dependencies passed as props or context.
   - Form: render title/children, invoke submit handler, conditionally render the
     alert, dismiss it, and tolerate no dismissal callback.
 
-- [ ] **T2.3 - Error UI**
+- [x] **T2.3 - Error UI**
   - Targets: `src/components/common/ErrorFallback.test.tsx`,
     `src/components/common/ErrorBoundary.test.tsx`
   - Fallback: explicit/default messages and optional reset button behavior.
   - Boundary: normal children, thrown-child fallback, and logged error.
 
-- [ ] **T2.4 - Login view**
+- [x] **T2.4 - Login view**
   - Target: `src/components/LoginView.test.tsx`
   - Test accessible email/password fields, required attributes, submitted values,
     prevented browser submission, form reset, and alert dismissal.
 
-- [ ] **T2.5 - Quote form view**
+- [x] **T2.5 - Quote form view**
   - Target: `src/partials/quoteForm/QuoteFormView.test.tsx`
   - Test loading state, quote list, empty list, submitted values, optional author,
     form reset, and alert rendering/dismissal.
 
-- [ ] **T2.6 - Post list**
+- [x] **T2.6 - Post list**
   - Target: `src/partials/PostsList.test.tsx`
   - Test loading, error, empty, and populated states.
   - Test titles/link destinations, body rendering, author/date display rules,
@@ -141,7 +141,12 @@ These should be fast DOM tests with dependencies passed as props or context.
     HTML is sanitized before rendering, or document that the API is a trusted
     source. Add a regression test after that decision.
 
-- [ ] **T2.7 - Header, footer, and random quote**
+  Security decision: post bodies are trusted, administrator-authored HTML from
+  the Wintertons API. `PostsList` intentionally preserves that markup. If post
+  authoring is opened to untrusted users, sanitize at the API boundary before
+  retaining this rendering contract.
+
+- [x] **T2.7 - Header, footer, and random quote**
   - Targets: `src/partials/Header.test.tsx`,
     `src/partials/Footer.test.tsx`, `src/partials/RandomQuotes.test.tsx`
   - Header: navigation destinations and mobile menu open/close behavior; add an
@@ -150,7 +155,7 @@ These should be fast DOM tests with dependencies passed as props or context.
   - Random quote: quote and author content plus the intended empty/loading state.
     Note that `{}` is currently truthy and renders blank quote markup.
 
-- [ ] **T2.8 - Modal and links**
+- [x] **T2.8 - Modal and links**
   - Targets: `src/partials/Modal.test.tsx`, `src/partials/Links.test.tsx`
   - Modal: hidden/visible states, supplied content, close button, backdrop close,
     and whether clicks inside the dialog should propagate and close it.

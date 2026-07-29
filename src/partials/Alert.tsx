@@ -14,7 +14,11 @@ const Alert = ({ type, message, removeAlert }: Props) => {
     return () => clearTimeout(timeout)
   }, [removeAlert])
 
-  return <p className={`alert alert-${type}`}>{message}</p>
+  return (
+    <p role="alert" className={`alert alert-${type}`}>
+      {message}
+    </p>
+  )
 }
 
 export default Alert
