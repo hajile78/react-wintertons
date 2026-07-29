@@ -101,7 +101,7 @@ These tests establish the contracts that hooks and components depend on.
 
 These should be fast DOM tests with dependencies passed as props or context.
 
-- [ ] **T2.1 - UI primitives**
+- [x] **T2.1 - UI primitives**
   - Targets: `src/components/ui/button.test.tsx`,
     `src/components/ui/card.test.tsx`
   - Test ref/attribute forwarding, variant/size classes, custom class merging,
