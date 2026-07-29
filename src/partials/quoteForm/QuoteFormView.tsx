@@ -5,6 +5,7 @@ import { Quote } from './Quote'
 interface QuoteFormViewProps {
   quotes: Quote[]
   loading: boolean
+  queryError?: boolean
   alert: { show: boolean; message: string; type: string }
   onSubmit: (quote: string, author: string) => void
   onDismissAlert: () => void
@@ -13,6 +14,7 @@ interface QuoteFormViewProps {
 export default function QuoteFormView({
   quotes,
   loading,
+  queryError = false,
   alert,
   onSubmit,
   onDismissAlert,
@@ -43,7 +45,9 @@ export default function QuoteFormView({
         </fieldset>
       </Form>
       <h2>Quotes in DB already</h2>
-      {loading ? (
+      {queryError ? (
+        <div role="alert">Error loading quotes.</div>
+      ) : loading ? (
         <div role="status" aria-live="polite">Loading quotes...</div>
       ) : (
         <figure>

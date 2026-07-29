@@ -2,13 +2,15 @@ import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { api } from '../../services/api'
 import QuoteFormView from './QuoteFormView'
+import type { QuoteData } from './Quote'
 
 export default function QuoteFormContainer() {
   const queryClient = useQueryClient()
-  const { data: quotes = [], isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery<QuoteData>({
     queryKey: ['quotes'],
     queryFn: api.getQuotes,
   })
+  const quotes = data?.quotes ?? []
   const [alert, setAlert] = useState({ show: false, message: '', type: '' })
 
   const addQuoteMutation = useMutation({
@@ -31,6 +33,7 @@ export default function QuoteFormContainer() {
     <QuoteFormView
       quotes={quotes}
       loading={isLoading}
+      queryError={isError}
       alert={alert}
       onSubmit={handleSubmit}
       onDismissAlert={() => setAlert({ show: false, message: '', type: '' })}

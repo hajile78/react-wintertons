@@ -30,9 +30,9 @@ function PostsForm() {
     e.preventDefault()
     const currentTarget = e.currentTarget
     if (
-      currentTarget.postTitle.value === '' ||
-      currentTarget.post.value === '' ||
-      currentTarget.author.value === ''
+      currentTarget.elements.postTitle.value === '' ||
+      currentTarget.elements.post.value === '' ||
+      currentTarget.elements.author.value === ''
     ) {
       setAlert({ show: true, type: 'danger', message: 'Please fill in all fields' })
       return
@@ -40,15 +40,15 @@ function PostsForm() {
 
     try {
       await api.addPost(
-        currentTarget.postTitle.value,
-        currentTarget.post.value,
-        currentTarget.author.value,
+        currentTarget.elements.postTitle.value,
+        currentTarget.elements.post.value,
+        currentTarget.elements.author.value,
         new Date()
       )
 
-      currentTarget.postTitle.value = ''
-      currentTarget.post.value = ''
-      currentTarget.author.value = ''
+      currentTarget.elements.postTitle.value = ''
+      currentTarget.elements.post.value = ''
+      currentTarget.elements.author.value = ''
       setAlert({ show: true, type: 'success', message: 'Post has been added' })
     } catch (err) {
       setAlert({ show: true, type: 'danger', message: 'Post has not been added' })
@@ -67,15 +67,15 @@ function PostsForm() {
       <fieldset style={styles}>
         <div>
           <label htmlFor="postTitle">Title</label>
-          <input type="text" name="postTitle" required />
+          <input id="postTitle" type="text" name="postTitle" required />
         </div>
         <div>
           <label htmlFor="post">Post Body</label>
-          <textarea name="post" style={{ height: '33vh' }} required></textarea>
+          <textarea id="post" name="post" style={{ height: '33vh' }} required></textarea>
         </div>
         <div>
           <label htmlFor="author">Author</label>
-          <select name="author" required>
+          <select id="author" name="author" required>
             <option value="">Select an author</option>
             <option value="Elijah">Elijah</option>
             <option value="Katie">Katie</option>

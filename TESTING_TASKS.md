@@ -168,27 +168,27 @@ These should be fast DOM tests with dependencies passed as props or context.
 
 Use real child views where practical and mock only network/auth boundaries.
 
-- [ ] **T3.1 - Login container**
+- [x] **T3.1 - Login container**
   - Target: `src/components/LoginContainer.test.tsx`
   - Successful login: correct credentials, success state, and navigation to the
     saved pathname or `/`.
   - Failed login: danger alert and no navigation.
   - Test dismissing the result alert.
 
-- [ ] **T3.2 - Protected route**
+- [x] **T3.2 - Protected route**
   - Target: `src/components/ProtectedRoute.test.tsx`
   - Anonymous users go to `/login` with the attempted location in route state.
   - Authenticated users render children.
   - Users lacking a required role go home; users with it render children.
 
-- [ ] **T3.3 - Posts form**
+- [x] **T3.3 - Posts form**
   - Target: `src/partials/PostsForm.test.tsx`
   - Test required/empty-field behavior at the component boundary.
   - Test exact `api.addPost` arguments with controlled system time.
   - Test success clearing fields and displaying an alert.
   - Test API failure preserving useful input and displaying the error alert.
 
-- [ ] **T3.4 - Quote form container**
+- [x] **T3.4 - Quote form container**
   - Target: `src/partials/quoteForm/QuoteFormContainer.test.tsx`
   - Test initial query loading/success/error behavior.
   - Test mutation arguments, success alert, error alert, and `quotes` query
@@ -199,7 +199,7 @@ Use real child views where practical and mock only network/auth boundaries.
     `{ quotes: Quote[] }`, while this container currently passes the whole result
     to a prop typed as `Quote[]`.
 
-- [ ] **T3.5 - Posts container**
+- [x] **T3.5 - Posts container**
   - Target: `src/partials/PostsContainer.test.tsx`
   - Test default route fetching `Main`, slug route fetching by slug, and ID route
     fetching one post.

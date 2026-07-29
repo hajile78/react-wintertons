@@ -25,8 +25,14 @@ function Form<T extends HTMLFormElement = HTMLFormElement>({
 
   return (
     <div className="col-span-2 flex flex-col gap-6">
-      <h2>{title}</h2>
-      <form id={id} onSubmit={handleFormSubmit} autoComplete="off" className="flex flex-col gap-6 max-w-md">
+      <h2 id={`${id}-title`}>{title}</h2>
+      <form
+        id={id}
+        aria-labelledby={`${id}-title`}
+        onSubmit={handleFormSubmit}
+        autoComplete="off"
+        className="flex flex-col gap-6 max-w-md"
+      >
         {alert.show && (
           <Alert
             {...alert}

@@ -37,6 +37,10 @@ export default function PostsContainer({ quotes, setQuote }: PostsContainerProps
     }
   }, [quotes, setQuote])
 
+  useEffect(() => {
+    setPage(1)
+  }, [slug, id])
+
   const paginatedPosts = posts.slice(0, page * postsPerPage)
   const hasMore = posts.length > paginatedPosts.length
   const handleMore = () => setPage((p) => p + 1)
