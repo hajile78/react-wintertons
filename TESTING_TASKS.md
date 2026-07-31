@@ -213,35 +213,35 @@ Use real child views where practical and mock only network/auth boundaries.
 
 These tests confirm wiring after the lower layers are stable.
 
-- [ ] **T4.1 - Route map**
+- [x] **T4.1 - Route map**
   - Target: `src/routes/index.test.tsx`
   - Assert the six expected paths and their rendered screens.
   - Test that `/addPost` is role-protected and the other current routes have the
     intended access policy.
   - Verify quote/setter props reach post routes.
 
-- [ ] **T4.2 - Layout integration**
+- [x] **T4.2 - Layout integration**
   - Target: `src/partials/layout.test.tsx`
   - With providers and a memory router, test the header/main/sidebar/footer shell.
   - Test representative paths: `/`, `/nav/:slug`, `/post/:id`, `/addQuote`,
     `/addPost`, and `/login`.
   - Mock network boundaries, not the entire route tree.
 
-- [ ] **T4.3 - App integration**
+- [x] **T4.3 - App integration**
   - Target: `src/App.test.tsx`
   - Render under router/query providers.
   - Verify auth, error boundary, and modal context are composed correctly.
   - Exercise opening and closing the prayer modal through the real `Links` UI.
   - Throw from a controlled child to confirm the application fallback.
 
-- [ ] **T4.4 - Entrypoint smoke test or manual contract**
+- [x] **T4.4 - Entrypoint smoke test or manual contract**
   - Target: `src/index.test.tsx` only if the entrypoint logic remains nontrivial.
   - Verify mounting into `#root`; decide whether a missing root should be a hard
     error rather than only a console message.
   - It is acceptable to cover this with the production build plus an end-to-end
     smoke test instead of a unit test.
 
-- [ ] **T4.5 - Browser smoke tests**
+- [x] **T4.5 - Browser smoke tests**
   - Add a small Playwright suite after component/integration tests are green.
   - Cover home loading, family navigation, login redirect, failed login, and a
     successful add-post/add-quote flow against a mocked or dedicated test API.
