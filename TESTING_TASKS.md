@@ -249,23 +249,35 @@ These tests confirm wiring after the lower layers are stable.
 
 ## 5. Quality Gates and Ongoing Practice
 
-- [ ] **T5.1 - Add deterministic CI commands**
+- [x] **T5.1 - Add deterministic CI commands**
   - Add `test:run`, `test:coverage`, and optional `test:ui` scripts.
   - Run typecheck/build, unit/integration tests, and coverage in CI.
 
-- [ ] **T5.2 - Introduce coverage thresholds gradually**
+- [x] **T5.2 - Introduce coverage thresholds gradually**
   - First baseline actual coverage after sections 1 and 2.
   - Raise thresholds as sections 3 and 4 land; prefer meaningful branch coverage
     over chasing 100% line coverage.
   - Suggested eventual floor: 80% statements/lines/functions and 75% branches,
     with higher expectations for `services`, `hooks`, and `context`.
 
-- [ ] **T5.3 - Keep tests behavior-focused**
+- [x] **T5.3 - Keep tests behavior-focused**
   - Query by role, accessible name, label, and visible text.
   - Avoid snapshots for large component trees and avoid assertions on incidental
     Tailwind classes except in the UI primitive tests.
   - Mock at external boundaries (`fetch`, auth SDK, time, browser APIs).
   - Add a regression test with every bug fix.
+
+### Quality Gate Baseline
+
+The T5 baseline measured 98.81% statements, 96.93% branches, 98.82%
+functions, and 98.79% lines. CI initially enforces 90% for statements, lines,
+and functions and 85% for branches. These floors leave room for responsible
+refactoring while preventing meaningful coverage regressions.
+
+The T5 behavior audit found no snapshot tests or implementation-only DOM
+selectors. Assertions on CSS classes are limited to UI primitive contracts and
+semantic alert variants. New bug fixes must continue to include a regression
+test at the narrowest useful test layer.
 
 ## Recommended Milestones
 
