@@ -1,37 +1,41 @@
 import { RouteObject } from 'react-router-dom'
-import Posts from '../partials/Posts'
-import QuoteForm from '../partials/quoteForm/QuoteForm'
+import PostsContainer from '../partials/PostsContainer'
+import QuoteFormContainer from '../partials/quoteForm/QuoteFormContainer'
 import PostsForm from '../partials/PostsForm'
 import { Quote } from '../partials/quoteForm/Quote'
 import { Dispatch, SetStateAction } from 'react'
 import ProtectedRoute from '../components/ProtectedRoute'
-import Login from '../components/Login'
+import LoginContainer from '../components/LoginContainer'
 
 export const createRoutes = (quotes: Quote[], setQuote: Dispatch<SetStateAction<Quote>>) => {
   const routes: RouteObject[] = [
     {
       path: '/nav/:slug',
-      element: <Posts quotes={quotes} setQuote={setQuote} />,
+      element: <PostsContainer quotes={quotes} setQuote={setQuote} />,
     },
     {
       path: '/post/:id',
-      element: <Posts quotes={quotes} setQuote={setQuote} />,
+      element: <PostsContainer quotes={quotes} setQuote={setQuote} />,
     },
     {
       path: '/addQuote',
-      element: <QuoteForm />,
+      element: <QuoteFormContainer />,
     },
     {
       path: '/addPost',
-      element: <ProtectedRoute requiredRole="user" children={<PostsForm />} />
+      element: (
+        <ProtectedRoute requiredRole="user">
+          <PostsForm />
+        </ProtectedRoute>
+      ),
     },
     {
       path: '/login',
-      element: <Login />
+      element: <LoginContainer />
     },
     {
       path: '/',
-      element: <Posts quotes={quotes} setQuote={setQuote} />,
+      element: <PostsContainer quotes={quotes} setQuote={setQuote} />,
     },
   ]
   return routes

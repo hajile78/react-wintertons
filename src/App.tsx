@@ -14,18 +14,16 @@ function App() {
 	const [modalText, setModalText] = useState({ header: '', body: '' })
 
 	return (
-		<AuthProvider>
-			<ErrorBoundary fallback={<ErrorFallback />}>
-				<ModalContext.Provider
-					value={{ showModal, setShowModal, modalText, setModalText }}
-				>
-					<Modal />
-					<div className='min-h-screen flex flex-col gap'>
+			<AuthProvider>
+				<ErrorBoundary fallback={<ErrorFallback />}>
+					<ModalContext.Provider
+						value={{ showModal, setShowModal, modalText, setModalText }}
+					>
+						<Modal />
 						<Layout />
-					</div>
-				</ModalContext.Provider>
-			</ErrorBoundary>
-		</AuthProvider>
+					</ModalContext.Provider>
+				</ErrorBoundary>
+			</AuthProvider>
 	)
 }
 

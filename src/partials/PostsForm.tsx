@@ -1,4 +1,4 @@
-import { useState, FormEvent } from 'react'
+import { useState, type FormEvent } from 'react'
 import CSS from 'csstype'
 import Form from '../components/common/Form'
 import { api } from '../services/api'
@@ -23,28 +23,32 @@ interface PostsFormElement extends HTMLFormElement {
   readonly elements: FormElements
 }
 
-const PostsForm: React.FC = () => {
+function PostsForm() {
   const [alert, setAlert] = useState({ show: false, message: '', type: '' })
-  
+
   const handleSubmit = async (e: FormEvent<PostsFormElement>) => {
     e.preventDefault()
     const currentTarget = e.currentTarget
-    if (currentTarget.postTitle.value === '' || currentTarget.post.value === '' || currentTarget.author.value === '') {
+    if (
+      currentTarget.elements.postTitle.value === '' ||
+      currentTarget.elements.post.value === '' ||
+      currentTarget.elements.author.value === ''
+    ) {
       setAlert({ show: true, type: 'danger', message: 'Please fill in all fields' })
       return
     }
-    
+
     try {
       await api.addPost(
-        currentTarget.postTitle.value,
-        currentTarget.post.value,
-        currentTarget.author.value,
+        currentTarget.elements.postTitle.value,
+        currentTarget.elements.post.value,
+        currentTarget.elements.author.value,
         new Date()
       )
-      
-      currentTarget.postTitle.value = ''
-      currentTarget.post.value = ''
-      currentTarget.author.value = ''
+
+      currentTarget.elements.postTitle.value = ''
+      currentTarget.elements.post.value = ''
+      currentTarget.elements.author.value = ''
       setAlert({ show: true, type: 'success', message: 'Post has been added' })
     } catch (err) {
       setAlert({ show: true, type: 'danger', message: 'Post has not been added' })
@@ -58,26 +62,27 @@ const PostsForm: React.FC = () => {
       title="Add new post"
       onSubmit={handleSubmit}
       alert={alert}
+      onDismissAlert={() => setAlert({ show: false, message: '', type: '' })}
     >
       <fieldset style={styles}>
         <div>
           <label htmlFor="postTitle">Title</label>
-          <input type="text" name="postTitle" required />
+          <input id="postTitle" type="text" name="postTitle" required />
         </div>
         <div>
           <label htmlFor="post">Post Body</label>
-          <textarea name="post" style={{ height: '33vh' }} required></textarea>
+          <textarea id="post" name="post" style={{ height: '33vh' }} required></textarea>
         </div>
-        <div>  
-        <label htmlFor="author">Author</label>
-        <select name="author" required>
-          <option value="">Select an author</option>
-          <option value="Elijah">Elijah</option>
-          <option value="Katie">Katie</option>
-          <option value="Kalob">Kalob</option>
-          <option value="Sam">Sam</option>
-          <option value="Ben">Ben</option>
-        </select>
+        <div>
+          <label htmlFor="author">Author</label>
+          <select id="author" name="author" required>
+            <option value="">Select an author</option>
+            <option value="Elijah">Elijah</option>
+            <option value="Katie">Katie</option>
+            <option value="Kalob">Kalob</option>
+            <option value="Sam">Sam</option>
+            <option value="Ben">Ben</option>
+          </select>
         </div>
       </fieldset>
     </Form>

@@ -5,6 +5,7 @@ import { AlertState } from '../../types/AlertType'
 interface FormProps<T extends HTMLFormElement = HTMLFormElement> {
   onSubmit: (e: FormEvent<T>) => void | Promise<void>
   alert: AlertState
+  onDismissAlert?: () => void
   children: ReactNode
   id: string
   title: string
@@ -13,6 +14,7 @@ interface FormProps<T extends HTMLFormElement = HTMLFormElement> {
 function Form<T extends HTMLFormElement = HTMLFormElement>({ 
   onSubmit, 
   alert, 
+  onDismissAlert, 
   children, 
   id, 
   title 
@@ -22,14 +24,25 @@ function Form<T extends HTMLFormElement = HTMLFormElement>({
   }
 
   return (
-    <>
-      <h2>{title}</h2>
-      <form id={id} onSubmit={handleFormSubmit} autoComplete="off">
-        {alert.show && <Alert {...alert} removeAlert={() => {}} />}
+    <div className="col-span-2 flex flex-col gap-6">
+      <h2 id={`${id}-title`}>{title}</h2>
+      <form
+        id={id}
+        aria-labelledby={`${id}-title`}
+        onSubmit={handleFormSubmit}
+        autoComplete="off"
+        className="flex flex-col gap-6 max-w-md"
+      >
+        {alert.show && (
+          <Alert
+            {...alert}
+            removeAlert={onDismissAlert ?? (() => {})}
+          />
+        )}
         {children}
-        <button type="submit">Submit</button>
+        <button type="submit" className='border rounded-md border-gray-400'>Submit</button>
       </form>
-    </>
+    </div>
   )
 }
 
