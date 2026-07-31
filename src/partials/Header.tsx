@@ -13,7 +13,7 @@ export default function HeaderNew() {
 
 				{/* Desktop Nav */}
 				<nav className='space-x-6 text-lg font-bold hidden md:block'>
-					<Link className='hover:text-blue-600' to={'/#'}>
+					<Link className='hover:text-blue-600' to='/'>
 						Home
 					</Link>
 					<Link className='hover:text-blue-600' to={'/nav/Elijah'}>
@@ -36,6 +36,8 @@ export default function HeaderNew() {
 				{/* Mobile Toggle */}
 				<button
 					onClick={() => setMenuOpen(!menuOpen)}
+					aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+					aria-expanded={menuOpen}
 					className='md:hidden p-2 rounded hover:bg-gray-100'
 				>
 					{menuOpen ? <X size={26} /> : <Menu size={26} />}
@@ -45,7 +47,7 @@ export default function HeaderNew() {
 			{/* Mobile Menu */}
 			{menuOpen && (
 				<div className='md:hidden bg-white shadow-inner border-t p-6 space-y-4'>
-					<Link className='block text-lg hover:text-blue-600' to={'/#'}>
+					<Link className='block text-lg hover:text-blue-600' to='/'>
 						Home
 					</Link>
 					<Link

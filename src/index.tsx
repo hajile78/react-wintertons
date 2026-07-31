@@ -2,19 +2,25 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { BrowserRouter as Router } from 'react-router-dom'
 
-const rootElemet = document.getElementById('root')
+export function mountApp(rootElement: HTMLElement | null) {
+  if (!rootElement) {
+    throw new Error('Root element not found')
+  }
 
-if (rootElemet) {
-  const root = ReactDOM.createRoot(rootElemet)
+  const root = ReactDOM.createRoot(rootElement)
+  const queryClient = new QueryClient()
   root.render(
     <React.StrictMode>
-      <Router>
-        <App />
-      </Router>
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <App />
+        </Router>
+      </QueryClientProvider>
     </React.StrictMode>
   )
-} else {
-  console.error('Root element not found!')
 }
+
+mountApp(document.getElementById('root'))

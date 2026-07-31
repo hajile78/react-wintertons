@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Quote, QuoteData } from '../partials/quoteForm/Quote'
+import { Quote } from '../partials/quoteForm/Quote'
 import { api } from '../services/api'
 
 const CACHE_KEY = 'quotes'
@@ -14,18 +14,30 @@ const useLocalStorage = <T,>(key: string, ttl: number) => {
   const get = (): T | null => {
     const item = localStorage.getItem(key)
     if (!item) return null
-    
-    const data: CacheData<T> = JSON.parse(item)
-    if (new Date().getTime() > data.expiry) {
+
+    let data: CacheData<T>
+    try {
+      data = JSON.parse(item)
+    } catch {
       localStorage.removeItem(key)
       return null
     }
+
+    if (
+      typeof data?.expiry !== 'number' ||
+      !Object.prototype.hasOwnProperty.call(data, 'value') ||
+      Date.now() > data.expiry
+    ) {
+      localStorage.removeItem(key)
+      return null
+    }
+
     return data.value
   }
 
   const set = (value: T): void => {
     const data: CacheData<T> = {
-      expiry: new Date().getTime() + ttl,
+      expiry: Date.now() + ttl,
       value
     }
     localStorage.setItem(key, JSON.stringify(data))
