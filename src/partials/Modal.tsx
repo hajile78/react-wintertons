@@ -17,7 +17,7 @@ const Modal = () => {
 						role='dialog'
 						aria-modal='true'
 						aria-labelledby='modal-title'
-						className='bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4 p-6 relative'
+						className='bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4 p-6 relative py-4 max-h-[90vh] overflow-y-auto'
 						onClick={(event) => event.stopPropagation()}
 					>
 						<button
