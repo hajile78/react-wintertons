@@ -8,7 +8,8 @@ export default function HeaderNew() {
 		<header className='w-full bg-sky-900 fixed top-0 left-0 z-50 text-[#fb8500]'>
 			<div className='max-w-7xl mx-auto px-6 py-4 flex items-center justify-between'>
 				<h1 className='text-2xl font-bold'>
-					Wintertons.us <span className='text-sm'>The Whole Famn Damily</span>
+					Wintertons.us{' '}
+					<span className='text-sm block md:inline'>The Whole Famn Damily</span>
 				</h1>
 
 				{/* Desktop Nav */}
@@ -36,7 +37,9 @@ export default function HeaderNew() {
 				{/* Mobile Toggle */}
 				<button
 					onClick={() => setMenuOpen(!menuOpen)}
-					aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+					aria-label={
+						menuOpen ? 'Close navigation menu' : 'Open navigation menu'
+					}
 					aria-expanded={menuOpen}
 					className='md:hidden p-2 rounded hover:bg-gray-100'
 				>
