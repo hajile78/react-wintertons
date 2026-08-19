@@ -4,7 +4,6 @@ import QuoteFormContainer from '../partials/quoteForm/QuoteFormContainer'
 import PostsForm from '../partials/PostsForm'
 import { Quote } from '../partials/quoteForm/Quote'
 import { Dispatch, SetStateAction } from 'react'
-import ProtectedRoute from '../components/ProtectedRoute'
 import LoginContainer from '../components/LoginContainer'
 
 export const createRoutes = (
@@ -26,11 +25,7 @@ export const createRoutes = (
 		},
 		{
 			path: '/addPost',
-			element: (
-				// <ProtectedRoute requiredRole="user">
-				<PostsForm />
-				// </ProtectedRoute>
-			),
+			element: <PostsForm />,
 		},
 		{
 			path: '/login',
