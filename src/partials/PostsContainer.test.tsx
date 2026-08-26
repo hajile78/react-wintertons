@@ -88,7 +88,9 @@ describe('PostsContainer', () => {
     )
     renderContainer('/')
 
-    expect(screen.getByRole('status')).toHaveTextContent('Loading...')
+    expect(
+      screen.getByRole('status', { name: 'Loading posts' }),
+    ).toBeInTheDocument()
 
     rejectPosts(new Error('Unable to load'))
 
