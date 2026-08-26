@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { CardSkeleton } from '@/components/ui/cardSkeleton'
 import { Post } from '../types/Post'
 
 interface PostsListProps {
@@ -15,7 +16,7 @@ export default function PostsList({ posts, loading, error, onMore }: PostsListPr
   const showUser = (user: string) => (user === 'Main' ? '' : `by ${user}`)
 
   if (loading) {
-    return <div role="status" aria-live="polite" className="loader">Loading...</div>
+    return <CardSkeleton label="Loading posts" className="lg:col-span-2" />
   }
   if (error) {
     return <div role="alert">Error loading posts.</div>

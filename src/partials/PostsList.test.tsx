@@ -21,7 +21,7 @@ describe('PostsList', () => {
         <PostsList posts={[]} loading error={false} />
       </MemoryRouter>,
     )
-    expect(screen.getByRole('status')).toHaveTextContent('Loading...')
+    expect(screen.getByRole('status', { name: 'Loading posts' })).toBeInTheDocument()
 
     rerender(
       <MemoryRouter>
