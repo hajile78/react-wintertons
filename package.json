@@ -48,7 +48,7 @@
 		"autoprefixer": "^10.5.4",
 		"jsdom": "^30.0.1",
 		"postcss": "^8.5.26",
-		"vitest": "^4.1.10"
+		"vitest": "^4.1.11"
 	},
 	"resolutions": {
 		"vite": "8.2.1",
