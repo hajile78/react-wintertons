@@ -1,10 +1,9 @@
-import { useState, type FormEvent } from 'react'
-import CSS from 'csstype'
+import { useState, type CSSProperties, type FormEvent } from 'react'
 import Form from '../components/common/Form'
 import { api } from '../services/api'
 import '../partials/css/postForm.css'
 
-const styles: CSS.Properties = {
+const styles: CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   alignContent: 'center',
